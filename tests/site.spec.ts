@@ -127,11 +127,15 @@ test("pending destinations and forms remain honest; media stays external", async
   page,
 }) => {
   await page.goto("/connect");
-  for (const name of ["Discord", "Facebook", "Donations", "Spotify podcast"]) {
+  for (const name of ["Facebook", "Donations", "Spotify podcast"]) {
     const row = page.locator(".connection-list li").filter({ hasText: name });
     await expect(row).toContainText(/pending/);
     await expect(row.locator("a")).toHaveCount(0);
   }
+  const discord = page.locator('.connection-list').getByRole('link', { name: /Discord/ });
+  await expect(discord).toHaveAttribute('href', 'https://discord.gg/xsTmy9rEA');
+  await expect(discord).toHaveAttribute('target', '_blank');
+  await expect(discord).toHaveAttribute('rel', 'noopener noreferrer');
   await page.goto("/get-involved");
   await expect(page.locator("form")).toHaveCount(0);
   await expect(

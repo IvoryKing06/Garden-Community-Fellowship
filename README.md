@@ -19,7 +19,7 @@ Tests run against the production preview, so build first. If Chromium is install
 
 ## Content and branding
 
-Edit `src/data/site.json`; `src/content-model.ts` defines the future CMS contract. Empty collections and null values render honest pending states. No invented address, Sunday service time, staff, beliefs, donation URL, or Bible study schedule is published. Existing Monday gatherings are preserved. Only user-supplied YouTube, Twitch, and email destinations are marked verified. Individual sermon recordings await verified URLs.
+Edit `src/data/site.json`; `src/content-model.ts` defines the future CMS contract. Empty collections and null values render honest pending states. No invented address, Sunday service time, staff, beliefs, donation URL, or Bible study schedule is published. Existing Monday gatherings are preserved. Only user-supplied YouTube, Twitch, Discord, and email destinations are marked verified. Individual sermon recordings await verified URLs.
 
 The approved artwork reference is the wide oak-tree/cross/sunrise/mountain banner supplied by the church. The actual attached file was not available in the workspace, so `branding.banner` is null pending import. No generated replacement logo is used. The banner component preserves the complete image and lettering at every viewport. See [the branding handoff](docs/phase-2-plan.md#approved-banner) for import instructions. Fonts are self-hosted through Fontsource. No livestream players are embedded.
 
