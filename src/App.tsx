@@ -14,24 +14,33 @@ import {
   Check,
   ChevronDown,
   Clock3,
-  Leaf,
   Mail,
   Menu,
   Play,
-  TreeDeciduous,
   X,
 } from "lucide-react";
-import { church, gatherings, ministries } from "./content";
+import {
+  church,
+  gatherings,
+  ministries,
+  bibleStudies,
+  outreach,
+  announcements,
+} from "./content";
+import {
+  PlanVisit,
+  GetInvolved,
+  Sermons,
+  ConnectionLinks,
+  OfficialBanner,
+} from "./PhaseOnePages";
+import { pageInfo } from "./pages";
 import "./App.css";
 const currentYear = new Date().getFullYear();
-const links = [
-  ["/", "Home"],
-  ["/about", "About Us"],
-  ["/ministries", "Ministries"],
-  ["/events", "Events"],
-  ["/watch", "Watch Live"],
-  ["/contact", "Contact"],
-];
+const links = Object.entries(pageInfo).map(([path, page]) => [
+  path,
+  page.title,
+]);
 function Brand() {
   return (
     <Link
@@ -39,7 +48,6 @@ function Brand() {
       to="/"
       aria-label="Garden Community Fellowship home"
     >
-      <TreeDeciduous size={45} strokeWidth={1.25} />
       <span>
         GARDEN<span>COMMUNITY FELLOWSHIP</span>
       </span>
@@ -52,9 +60,22 @@ function Header() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const page =
-      links.find(([path]) => path === location.pathname)?.[1] ??
-      "Page not found";
-    document.title = `${page} | ${church.name}`;
+      pageInfo[
+        (location.pathname.replace(/\/$/, "") || "/").replace(
+          /^\/contact$/,
+          "/connect",
+        )
+      ];
+    document.title = `${page?.title ?? "Page not found"} | ${church.name}`;
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", page?.description ?? "Page not found.");
+    document
+      .querySelector('meta[property="og:title"]')
+      ?.setAttribute("content", document.title);
+    document
+      .querySelector('meta[property="og:description"]')
+      ?.setAttribute("content", page?.description ?? "Page not found.");
   }, [location]);
   return (
     <>
@@ -85,14 +106,35 @@ function Header() {
             className={open ? "open" : ""}
             aria-label="Main navigation"
           >
-            {links.map(([to, label]) => (
-              <NavLink key={to} to={to} end>
-                {label}
-              </NavLink>
-            ))}
-            <Link className="button small" to="/contact">
-              Let’s connect <ArrowUpRight size={15} />
-            </Link>
+            <NavLink to="/" end>
+              Home
+            </NavLink>
+            <details className="nav-group" key={`about-${location.pathname}`}>
+              <summary>
+                About <ChevronDown size={13} />
+              </summary>
+              <div className="nav-dropdown">
+                <NavLink to="/about">About Us</NavLink>
+                <NavLink to="/plan-your-visit">Plan Your Visit</NavLink>
+              </div>
+            </details>
+            <details
+              className="nav-group"
+              key={`community-${location.pathname}`}
+            >
+              <summary>
+                Community <ChevronDown size={13} />
+              </summary>
+              <div className="nav-dropdown">
+                <NavLink to="/events">Events &amp; Outreach</NavLink>
+                <NavLink to="/ministries">
+                  Ministries &amp; Bible Studies
+                </NavLink>
+                <NavLink to="/get-involved">Get Involved</NavLink>
+              </div>
+            </details>
+            <NavLink to="/sermons">Sermons</NavLink>
+            <NavLink to="/connect">Connect</NavLink>
           </nav>
         </div>
       </header>
@@ -121,21 +163,6 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
       <span />
       {children}
     </p>
-  );
-}
-function OakArt({ small = false }: { small?: boolean }) {
-  return (
-    <div
-      className={`oak-art ${small ? "compact" : ""}`}
-      role="img"
-      aria-label="Illustrated oak tree in a warm, sunlit landscape"
-    >
-      <div className="sun" />
-      <div className="hill hill-one" />
-      <div className="hill hill-two" />
-      <TreeDeciduous className="oak" strokeWidth={0.65} />
-      <span className="art-caption">ROOTED TOGETHER. GROWING TOGETHER.</span>
-    </div>
   );
 }
 function SectionTitle({
@@ -167,7 +194,6 @@ function MinistryCards() {
           key={m.id}
         >
           <div className="ministry-art">
-            <Leaf size={i === 0 ? 80 : 60} strokeWidth={0.8} />
             <span>{m.symbol}</span>
           </div>
           <div className="card-body">
@@ -182,22 +208,22 @@ function MinistryCards() {
     </div>
   );
 }
-function EventList({ illustrated = false }: { illustrated?: boolean }) {
+function EventList() {
   return (
     <div className="event-list">
       {gatherings.map((g) => (
         <article className="event-row" key={g.id}>
           <div className="date-tile">
-            <span>EVERY</span>
-            <strong>MON</strong>
+            <span>{g.date ? "DATE" : "WEEKLY"}</span>
+            <strong>{g.date ?? g.day.replace("Every ", "")}</strong>
           </div>
-          {illustrated && (
+          {g.image && (
             <img
               className="event-image"
-              src="/gathering.svg"
-              alt="Illustrated leaves, placeholder event artwork"
-              width="128"
-              height="90"
+              src={g.image.src}
+              alt={g.image.alt}
+              width={g.image.width}
+              height={g.image.height}
               loading="lazy"
             />
           )}
@@ -211,7 +237,7 @@ function EventList({ illustrated = false }: { illustrated?: boolean }) {
             {g.time}
           </span>
           <Link
-            to="/contact"
+            to="/connect"
             aria-label={`Ask about ${g.title}`}
             className="circle-link"
           >
@@ -225,6 +251,7 @@ function EventList({ illustrated = false }: { illustrated?: boolean }) {
 function Home() {
   return (
     <>
+      <OfficialBanner />
       <section className="hero container">
         <div className="hero-copy">
           <Eyebrow>Welcome to Garden Community Fellowship</Eyebrow>
@@ -238,7 +265,7 @@ function Home() {
             root and life is shared, one connection at a time.
           </p>
           <div className="actions">
-            <Button to="/about">Get to know us</Button>
+            <Button to="/plan-your-visit">Plan your visit</Button>
             <Link className="play-link" to="/watch">
               <span>
                 <Play size={15} fill="currentColor" />
@@ -247,11 +274,9 @@ function Home() {
             </Link>
           </div>
           <div className="hero-note">
-            <Leaf size={18} />
             <span>Come as you are. Grow with us.</span>
           </div>
         </div>
-        <OakArt />
       </section>
       <section className="gather-strip">
         <div className="container gather-inner">
@@ -272,10 +297,6 @@ function Home() {
         </div>
       </section>
       <section className="section container intro">
-        <div className="intro-mark">
-          <TreeDeciduous size={118} strokeWidth={0.8} />
-          <span>FAITH. COMMUNITY. GROWTH.</span>
-        </div>
         <div>
           <Eyebrow>A community to call home</Eyebrow>
           <h2>
@@ -317,6 +338,17 @@ function Home() {
           information.
         </p>
       </section>
+      {announcements.length > 0 && (
+        <section className="section container">
+          <h2>Announcements</h2>
+          {announcements.map((a) => (
+            <article className="info-card" key={a.id}>
+              <h3>{a.title}</h3>
+              <p>{a.body}</p>
+            </article>
+          ))}
+        </section>
+      )}
       <WatchBanner />
     </>
   );
@@ -346,7 +378,6 @@ function About() {
         your next step toward connection.
       </PageHead>
       <section className="container about-layout">
-        <OakArt small />
         <div>
           <Eyebrow>About us</Eyebrow>
           <h2>
@@ -359,7 +390,7 @@ function About() {
             explore our ministries, connect at a Monday gathering, or join us
             online.
           </p>
-          <Button to="/contact">Start a conversation</Button>
+          <Button to="/connect">Start a conversation</Button>
         </div>
       </section>
       <section className="section container info-grid">
@@ -378,7 +409,6 @@ function About() {
           ],
         ].map(([title, text]) => (
           <article className="info-card" key={title}>
-            <Leaf size={26} />
             <h3>{title}</h3>
             <p>{text}</p>
             <span className="status">Details coming soon</span>
@@ -395,7 +425,10 @@ function Ministries() {
   }, []);
   return (
     <>
-      <PageHead label="Find your community" title="Grow in good company.">
+      <PageHead
+        label="Ministries & Bible Studies"
+        title="Grow in good company."
+      >
         Explore places to connect, share life, and take your next step at
         Garden.
       </PageHead>
@@ -407,6 +440,17 @@ function Ministries() {
               <Eyebrow>{m.category}</Eyebrow>
               <h2>{m.name}</h2>
               <p>{m.description}</p>
+              {m.schedule && <p>{m.schedule}</p>}
+              {m.image && (
+                <img
+                  className="content-image"
+                  src={m.image.src}
+                  alt={m.image.alt}
+                  width={m.image.width}
+                  height={m.image.height}
+                  loading="lazy"
+                />
+              )}
               <details>
                 <summary>
                   More information <ChevronDown size={18} />
@@ -417,13 +461,32 @@ function Ministries() {
                     : "Schedules, age groups, and ministry leader information are awaiting confirmation."}{" "}
                   Email us for current information and location details.
                 </p>
-                <Link className="text-link" to="/contact">
+                <Link className="text-link" to="/connect">
                   Ask about this ministry <ArrowRight size={16} />
                 </Link>
               </details>
             </div>
           </article>
         ))}
+      </section>
+      <section className="container section">
+        <h2>Bible Studies</h2>
+        {bibleStudies.length ? (
+          bibleStudies.map((b) => (
+            <article key={b.id}>
+              <h3>{b.title}</h3>
+              <p>{b.description}</p>
+              <p>{b.schedule ?? "Schedule pending confirmation."}</p>
+            </article>
+          ))
+        ) : (
+          <p>
+            Bible study topics, leaders, and schedules are pending confirmation.{" "}
+            <Link className="text-link" to="/connect">
+              Contact the church for current information.
+            </Link>
+          </p>
+        )}
       </section>
       <WatchBanner />
     </>
@@ -432,7 +495,7 @@ function Ministries() {
 function Events() {
   return (
     <>
-      <PageHead label="Life at Garden" title="Good things happen together.">
+      <PageHead label="Events & Outreach" title="Good things happen together.">
         Make space for community. Here’s what’s coming up each week at Garden
         Community Fellowship.
       </PageHead>
@@ -444,14 +507,32 @@ function Events() {
             schedules and locations.
           </p>
         </div>
-        <EventList illustrated />
+        <EventList />
+        <section className="section">
+          <h2>Outreach</h2>
+          {outreach.length ? (
+            outreach.map((o) => (
+              <article key={o.id}>
+                <h3>{o.title}</h3>
+                <p>{o.description}</p>
+              </article>
+            ))
+          ) : (
+            <p>
+              Outreach opportunities and dates are pending confirmation.{" "}
+              <Link className="text-link" to="/get-involved">
+                Explore ways to get involved.
+              </Link>
+            </p>
+          )}
+        </section>
         <div className="info-card upcoming">
           <h3>More to look forward to.</h3>
           <p>
             Dated special events and event photographs will appear here once
             confirmed. Stay connected for updates.
           </p>
-          <Button to="/contact">Get in touch</Button>
+          <Button to="/connect">Get in touch</Button>
         </div>
       </section>
     </>
@@ -527,7 +608,7 @@ function Contact() {
   }
   return (
     <>
-      <PageHead label="You’re welcome here" title="Let’s start a conversation.">
+      <PageHead label="Connect" title="Let’s start a conversation.">
         Have a question or planning your first visit? We’d love to hear from
         you.
       </PageHead>
@@ -558,16 +639,8 @@ function Contact() {
         </article>
         <div className="contact-side">
           <h3>Find us online</h3>
-          <a href={church.youtube} target="_blank" rel="noopener noreferrer">
-            YouTube <ArrowUpRight size={19} />
-            <span className="sr-only"> (opens in new tab)</span>
-          </a>
-          <a href={church.twitch} target="_blank" rel="noopener noreferrer">
-            Twitch <ArrowUpRight size={19} />
-            <span className="sr-only"> (opens in new tab)</span>
-          </a>
+          <ConnectionLinks />
           <div className="visit-note">
-            <Leaf size={27} />
             <h3>Planning a visit?</h3>
             <p>
               We’ll be happy to help you find current service information and
@@ -617,9 +690,9 @@ function Footer() {
     </footer>
   );
 }
-export default function App() {
+export function Site() {
   return (
-    <BrowserRouter>
+    <>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -631,7 +704,11 @@ export default function App() {
           <Route path="/ministries" element={<Ministries />} />
           <Route path="/events" element={<Events />} />
           <Route path="/watch" element={<Watch />} />
+          <Route path="/connect" element={<Contact />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/plan-your-visit" element={<PlanVisit />} />
+          <Route path="/get-involved" element={<GetInvolved />} />
+          <Route path="/sermons" element={<Sermons />} />
           <Route
             path="*"
             element={
@@ -644,6 +721,14 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Site />
     </BrowserRouter>
   );
 }

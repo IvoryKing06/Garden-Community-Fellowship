@@ -105,68 +105,6 @@ nav > a:hover {
   color: #59634f;
   margin-top: 39px;
 }
-.oak-art {
-  height: 505px;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(145deg, #e9e7d8, #d7d9bf 65%, #a6af85);
-  border-radius: 48% 48% 3px 3px;
-  isolation: isolate;
-}
-.oak-art:after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.12;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.5' filter='url(%23n)'/%3E%3C/svg%3E");
-  pointer-events: none;
-}
-.sun {
-  position: absolute;
-  background: #f6edcb;
-  border-radius: 50%;
-  width: 185px;
-  height: 185px;
-  top: 50px;
-  right: 30px;
-  filter: blur(2px);
-  opacity: 0.7;
-}
-.oak {
-  position: absolute;
-  width: 91%;
-  height: 83%;
-  left: 5%;
-  bottom: 45px;
-  color: #435d3a;
-  filter: drop-shadow(5px 9px 2px #364a2b12);
-}
-.hill {
-  position: absolute;
-  width: 180%;
-  height: 180px;
-  border-radius: 50%;
-  left: -40%;
-  bottom: -75px;
-  background: #9daa7d;
-  transform: rotate(-8deg);
-}
-.hill-two {
-  left: 5%;
-  bottom: -95px;
-  background: #7c8e68;
-  transform: rotate(10deg);
-}
-.art-caption {
-  position: absolute;
-  bottom: 22px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: #263e31;
-  font-size: 8px;
-  letter-spacing: 2px;
-}
 .gather-strip {
   background: #eeefe6;
   border-block: 1px solid #e3e6da;
@@ -973,4 +911,180 @@ main {
   .event-image {
     display: none;
   }
+}
+/* Revised Phase 1: restrained typography, grouped navigation, official banner. */
+.nav-group {
+  position: relative;
+  margin: 0;
+  border: 0;
+  font-size: 11px;
+}
+.nav-group summary {
+  font-size: 11px;
+  gap: 7px;
+  padding: 13px 0;
+  list-style: none;
+}
+.nav-group summary::-webkit-details-marker {
+  display: none;
+}
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  width: 245px;
+  background: #faf9f5;
+  border: 1px solid #dce0d2;
+  box-shadow: 0 12px 20px #29463412;
+  z-index: 20;
+  padding: 12px;
+  display: grid;
+  gap: 4px;
+}
+.nav-dropdown a {
+  padding: 12px;
+  font-size: 12px;
+}
+.nav-dropdown a:hover,
+.nav-dropdown a.active {
+  background: #eeeee4;
+  color: #59451f;
+}
+.official-banner {
+  padding-top: 20px;
+}
+.official-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.banner-pending {
+  border: 1px solid #dce0d2;
+  padding: 22px;
+  background: #efeee6;
+}
+.banner-pending p {
+  margin: 0;
+  font-size: 13px;
+}
+.banner-pending .eyebrow {
+  margin-bottom: 8px;
+}
+.hero {
+  display: block;
+  padding-block: 55px;
+}
+.hero-copy > p:not(.eyebrow) {
+  max-width: 620px;
+}
+.hero h1 {
+  font-size: clamp(48px, 5vw, 72px);
+}
+.intro,
+.about-layout {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.intro > div {
+  max-width: 750px;
+}
+.intro p {
+  max-width: 650px;
+}
+.ministry-art {
+  min-height: 0;
+  height: 65px;
+  background: #e8ebdf !important;
+}
+.ministry-art:before,
+.ministry-art:after {
+  display: none;
+}
+.ministry-art > span {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  position: static;
+}
+.info-card h2 {
+  font-size: 32px;
+}
+.info-card h3:first-child {
+  margin-top: 0;
+}
+.connection-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.connection-list li > a,
+.connection-list li > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid #dce0d2;
+  font-size: 13px;
+}
+.connection-list .status {
+  font-size: 9px;
+}
+.content-image {
+  width: 100%;
+  height: auto;
+}
+.footer-links {
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+.contact-side > h3 {
+  margin-bottom: 8px;
+}
+@media (max-width: 760px) {
+  .nav-group {
+    width: 100%;
+  }
+  .nav-group summary {
+    font-size: 14px;
+    padding: 13px;
+  }
+  .nav-dropdown {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border: 0;
+    padding: 0 0 10px 14px;
+  }
+  .hero {
+    padding-block: 35px;
+  }
+  .ministry-card {
+    display: block;
+  }
+  .ministry-art {
+    height: 50px;
+    min-height: 0;
+  }
+  .about-layout {
+    padding-bottom: 20px;
+  }
+  .official-banner {
+    padding-top: 10px;
+  }
+  .banner-pending {
+    padding: 18px;
+  }
+}
+
+.date-tile strong {
+  font-size: 13px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.date-tile {
+  min-width: 73px;
+  width: auto;
+  padding: 10px;
+  max-width: 115px;
 }

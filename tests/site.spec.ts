@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-test("all six pages load directly with accessible content and no browser errors", async ({
+test("all required pages load directly with accessible content and no browser errors", async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -12,7 +12,10 @@ test("all six pages load directly with accessible content and no browser errors"
     "/ministries",
     "/events",
     "/watch",
-    "/contact",
+    "/connect",
+    "/plan-your-visit",
+    "/get-involved",
+    "/sermons",
   ]) {
     await page.goto(path);
     await expect(page.locator("h1")).toBeVisible();
@@ -46,7 +49,12 @@ test("mobile navigation opens, routes, and closes without horizontal overflow", 
   ).toHaveAttribute("aria-expanded", "true");
   await page
     .getByRole("navigation")
-    .getByRole("link", { name: "Ministries", exact: true })
+    .locator("summary")
+    .filter({ hasText: "Community" })
+    .click();
+  await page
+    .getByRole("navigation")
+    .getByRole("link", { name: "Ministries & Bible Studies", exact: true })
     .click();
   await expect(page).toHaveURL(/ministries/);
   await expect(toggle).toHaveAttribute("aria-expanded", "false");
@@ -62,7 +70,10 @@ test("mobile navigation opens, routes, and closes without horizontal overflow", 
       "/ministries",
       "/events",
       "/watch",
-      "/contact",
+      "/connect",
+      "/plan-your-visit",
+      "/get-involved",
+      "/sermons",
     ]) {
       await page.goto(path);
       expect(
@@ -110,4 +121,51 @@ test("gathering times and official contact and channel links are correct", async
     path: "/tmp/gcf-contact-mobile.png",
     fullPage: true,
   });
+});
+
+test("pending destinations and forms remain honest; media stays external", async ({
+  page,
+}) => {
+  await page.goto("/connect");
+  for (const name of ["Discord", "Facebook", "Donations", "Spotify podcast"]) {
+    const row = page.locator(".connection-list li").filter({ hasText: name });
+    await expect(row).toContainText(/pending/);
+    await expect(row.locator("a")).toHaveCount(0);
+  }
+  await page.goto("/get-involved");
+  await expect(page.locator("form")).toHaveCount(0);
+  await expect(
+    page.getByRole("link", { name: "Email your interest" }),
+  ).toHaveAttribute("href", /mailto:gcf.online.studios@gmail.com/);
+  for (const route of ["/sermons", "/watch"]) {
+    await page.goto(route);
+    await expect(page.locator("iframe, video")).toHaveCount(0);
+  }
+  await page.goto("/sermons");
+  await expect(
+    page.getByText(/Individual recording links, titles, and dates are pending/),
+  ).toBeVisible();
+  await page.goto("/contact");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Let’s start a conversation.",
+  );
+});
+
+test("static HTML contains route-specific content before JavaScript", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  for (const [route, title] of [
+    ["/about", "About Us"],
+    ["/plan-your-visit", "Plan Your Visit"],
+    ["/sermons", "Sermons"],
+    ["/get-involved", "Get Involved"],
+    ["/connect", "Connect"],
+  ]) {
+    await page.goto("http://127.0.0.1:4173" + route);
+    await expect(page).toHaveTitle(title + " | Garden Community Fellowship");
+    await expect(page.locator("h1")).toBeVisible();
+  }
+  await context.close();
 });
