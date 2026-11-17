@@ -50,8 +50,8 @@ export function PlanVisit() {
   return (
     <>
       <Heading label="Plan Your Visit" title="We look forward to meeting you.">
-        Let us help you plan your first visit. Contact the church for confirmed
-        information before you travel.
+        Join us in Lake Isabella for Sunday worship and fellowship. We’re happy
+        to answer your questions as you plan your first visit.
       </Heading>
       <section className="container info-grid section">
         <article className="info-card">
@@ -61,7 +61,7 @@ export function PlanVisit() {
               "Sunday service times are pending confirmation."}
           </p>
           <Link className="text-link" to="/events">
-            See confirmed Monday gatherings <ArrowRight size={16} />
+            See the full church schedule <ArrowRight size={16} />
           </Link>
         </article>
         <article className="info-card">
@@ -75,7 +75,10 @@ export function PlanVisit() {
           </a>
         </article>
         <article className="info-card">
-          <h2>Your visit</h2>
+          <h2>Contact &amp; mailing</h2>
+          <p><a href={`tel:${church.phone}`}>{church.phone}</a></p>
+          <p>Mailing address: {church.mailingAddress}</p>
+          <h3>Your visit</h3>
           <p>
             {visit.accessibility ??
               "Accessibility, parking, and children’s check-in details are pending confirmation. Email us about your needs before visiting."}

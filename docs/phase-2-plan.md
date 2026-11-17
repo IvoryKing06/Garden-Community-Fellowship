@@ -25,9 +25,8 @@ Null values and empty collections remain explicit pending states. A YouTube chan
 
 ## Approved banner
 
-The supplied visual reference depicts an oak tree, wooden cross, sunrise, mountain landscape, and GARDEN COMMUNITY FELLOWSHIP lettering. Its original image bytes were not exposed to this workspace. Do not substitute generated art. `branding.banner` remains null until the actual file is imported.
+The approved oak/cross/sunrise/mountain banner has been imported from the existing root `gcf-banner.webp` into `public/uploads/gcf-banner.webp`. Verified dimensions are **2172 × 724**, and size is **263,564 bytes** (under 300 KB). `branding.banner` now points to this asset with descriptive alt text and the verified dimensions. The renderer preserves intrinsic proportions, full width, automatic height, and contain sizing on mobile and desktop. Do not crop away lettering or substitute generated art. The header retains the plain text wordmark.
 
-Save optimized copies of the original in `public/uploads`, then set `branding.banner` to `{ "src": "/uploads/gcf-banner.webp", "alt": "Garden Community Fellowship — oak tree, wooden cross, sunrise, and mountain landscape", "width": 2048, "height": 683 }` only after verifying the actual dimensions. Preserve the complete composition and all words. The banner uses intrinsic proportions, full width, automatic height, and contain sizing on mobile and desktop. Do not create a narrow mobile crop that removes lettering. Target a compressed WebP/AVIF under roughly 300 KB; retain the original outside public build output if needed. The header uses a plain text wordmark, not a replacement logo.
 
 ## Forms in Phase 2
 

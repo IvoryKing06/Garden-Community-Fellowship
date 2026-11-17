@@ -91,16 +91,25 @@ test("gathering times and official contact and channel links are correct", async
 }) => {
   await page.goto("/events");
   const events = page.locator(".event-row");
-  await expect(events).toHaveCount(3);
-  await expect(events.filter({ hasText: "Connect Café" })).toContainText(
-    "6 PM",
-  );
-  await expect(events.filter({ hasText: "Cross Talk Café" })).toContainText(
-    "6:15 PM",
-  );
-  await expect(events.filter({ hasText: "Celebrate Recovery" })).toContainText(
-    "7 PM",
-  );
+  await expect(events).toHaveCount(10);
+  for (const [title, time] of [
+    ["Prayer", "8:00–8:40 AM"],
+    ["Adult Sunday School", "8:45–9:45 AM"],
+    ["Sunday Service", "10:00 AM–12:00 PM"],
+    ["Celebrate Recovery", "7:00–9:00 PM"],
+    ["Men’s Bible Study", "6:00–8:00 PM"],
+    ["Co-Ed Bible Study", "5:00–7:00 PM"],
+    ["Women’s Bible Stories", "6:00–8:00 PM"],
+    ["Night of Praise and Worship", "6:00–8:00 PM"],
+    ["Communion and Potluck Meal", "Time to be confirmed"],
+    ["Celebrate Recovery Step Study", "4:00–6:00 PM"],
+  ]) {
+    await expect(events.filter({ has: page.getByRole("heading", { name: title, exact: true }) })).toContainText(time);
+  }
+  await expect(events.filter({ hasText: "Night of Praise" })).toContainText("MONTHLY");
+  await expect(events.filter({ hasText: "Step Study" })).toContainText("recurrence to be confirmed");
+  await expect(page.getByRole("complementary")).toContainText("café");
+  await expect(events.filter({ hasText: "Café" })).toHaveCount(0);
   await page.goto("/watch");
   await expect(
     page.getByRole("link", { name: /Open YouTube/ }),
@@ -127,11 +136,11 @@ test("pending destinations and forms remain honest; media stays external", async
   page,
 }) => {
   await page.goto("/connect");
-  for (const name of ["Facebook", "Donations", "Spotify podcast"]) {
-    const row = page.locator(".connection-list li").filter({ hasText: name });
-    await expect(row).toContainText(/pending/);
-    await expect(row.locator("a")).toHaveCount(0);
-  }
+  await expect(page.locator("body")).not.toContainText(/facebook|olive branches|\boaks\b/i);
+  const spotify = page.locator(".connection-list li").filter({ hasText: "Spotify podcast" });
+  await expect(spotify).toContainText(/pending/);
+  await expect(spotify.locator("a")).toHaveCount(0);
+  await expect(page.locator(".connection-list").getByRole("link", { name: /Donations/ })).toHaveAttribute("href", "https://forms.ministryforms.net/viewForm.aspx?formId=1b5ad390-6ef4-402f-868a-594e21f48402&app-redirect=&source=20");
   const discord = page.locator('.connection-list').getByRole('link', { name: /Discord/ });
   await expect(discord).toHaveAttribute('href', 'https://discord.gg/xsTmy9rEA');
   await expect(discord).toHaveAttribute('target', '_blank');
@@ -172,4 +181,45 @@ test("static HTML contains route-specific content before JavaScript", async ({
     await expect(page.locator("h1")).toBeVisible();
   }
   await context.close();
+});
+
+
+test("pastor beliefs, official banner and inquiry addresses remain intact", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("navigation").locator("summary").filter({ hasText: "About" }).click();
+  await page.getByRole("navigation").getByRole("link", { name: "What We Believe", exact: true }).click();
+  await expect(page).toHaveURL(/about#what-we-believe/);
+  await expect(page.getByRole("heading", { name: "What We Believe", exact: true })).toBeInViewport();
+  await page.goto("/about");
+  await expect(page.locator(".faith-statement p")).toHaveCount(9);
+  await expect(page.locator(".faith-article")).toHaveCount(19);
+  await expect(page.locator(".faith-statement")).toContainText("Every human life is valuable");
+  const article = page.locator(".faith-article").filter({ has: page.locator("summary", { hasText: "The Sacraments" }) });
+  await article.locator("summary").click();
+  await expect(article).toContainText("The sacraments are not a means of salvation.");
+  await expect(article.getByText(/Matt. 26:26-28/)).toBeVisible();
+  for (const route of ["/", "/about", "/events", "/ministries", "/plan-your-visit", "/connect", "/get-involved"]) {
+    await page.goto(route);
+    await expect(page.locator("body")).not.toContainText(/gardencommunityfellowship@gmail.com|facebook|olive branches|\boaks\b/i);
+    for (const link of await page.locator('a[href^="mailto:"]').all()) {
+      await expect(link).toHaveAttribute("href", /^mailto:gcf\.online\.studios@gmail\.com(?:\?|$)/);
+    }
+  }
+  await page.goto("/");
+  const banner = page.locator(".official-banner img");
+  await expect(banner).toHaveAttribute("src", "/uploads/gcf-banner.webp");
+  expect(await banner.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBe(2172);
+  await expect(page.locator(".gather-strip")).toContainText("10:00 AM–12:00 PM");
+  await expect(page.locator(".gather-strip")).toContainText("2931 Erskine Creek Rd");
+});
+
+test("capture desktop and mobile review screenshots", async ({ page }) => {
+  for (const [device, width, height] of [["desktop", 1440, 1000], ["mobile", 390, 844]] as const) {
+    await page.setViewportSize({ width, height });
+    for (const [name, route] of [["home", "/"], ["schedule", "/events"], ["beliefs", "/about"], ["visit", "/plan-your-visit"]]) {
+      await page.goto(route);
+      await page.evaluate(() => document.fonts.ready);
+      await page.screenshot({ path: `docs/review/phase-1-${name}-${device}.png`, fullPage: true });
+    }
+  }
 });

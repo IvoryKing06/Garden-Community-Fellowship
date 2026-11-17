@@ -8,22 +8,22 @@ export const pageInfo: Record<string, { title: string; description: string }> =
     "/about": {
       title: "About Us",
       description:
-        "Get to know Garden Community Fellowship. Church-approved mission, beliefs, and leadership information are coming soon.",
+        "Get to know Garden Community Fellowship. Read our Statement of Faith and Articles of Faith.",
     },
     "/plan-your-visit": {
       title: "Plan Your Visit",
       description:
-        "Plan your first visit to Garden Community Fellowship. Contact the church for confirmed service times, accessibility information, and directions.",
+        "Plan your first visit to Garden Community Fellowship. Sunday worship is 10:00 AM–12:00 PM at 2931 Erskine Creek Rd, Lake Isabella.",
     },
     "/events": {
       title: "Events & Outreach",
       description:
-        "Explore Monday gatherings and future outreach at Garden Community Fellowship. Cafés from 6 PM and Celebrate Recovery at 7 PM.",
+        "Explore Sunday services, weekly Bible studies, Celebrate Recovery, and monthly gatherings at Garden Community Fellowship.",
     },
     "/ministries": {
       title: "Ministries & Bible Studies",
       description:
-        "Discover Sprouts, men’s ministry, Celebrate Recovery, and future Bible studies at Garden Community Fellowship.",
+        "Discover Sprouts, men’s ministry, Celebrate Recovery, and weekly Bible studies at Garden Community Fellowship.",
     },
     "/sermons": {
       title: "Sermons",

@@ -68,3 +68,18 @@ The full Articles of Faith expand these topics across: Trinity, Father, Son, Hol
 - Add phone and contact information cleanly, after the public-email decision.
 - Check responsive design, route prerender, accessibility, and tests. Update any tests assuming exactly three Monday event rows.
 - Never merge or deploy without review.
+
+## Phase 1 implementation review — November 17, 2026
+
+The three original DOCX attachments were reviewed directly. The official schedule is now in typed site content; Sunday service/address appear on Home and Plan Your Visit, and weekday studies appear under Ministries. What We Believe is on `/about#what-we-believe`: all nine Statement of Faith paragraphs and all 19 Articles of Faith are transcribed, including Scripture references. Only surrounding whitespace was normalized; source wording and reference typos are retained for pastoral review. Original DOCX files, document footers, tax ID, and document-only email are not published.
+
+The approved banner is now imported at its verified 2172 × 724 dimensions. All public email inquiries remain gcf.online.studios@gmail.com. Confirmed donation, Discord, YouTube, and Twitch links are unchanged. Leadership remains deferred; Facebook and unapproved ministry nicknames remain excluded.
+
+Before publication, please review the beliefs transcription and clarify:
+
+- Whether Sunday Celebrate Recovery Step Study is weekly or first-Sunday only (4:00–6:00 PM is specified).
+- The separate time, if any, for first-Sunday Communion and Potluck Meal.
+- How Monday Connect Café and Cross Talk Café relate to the pastor’s 6:15 PM doors-open note. Earlier café times are no longer displayed as confirmed schedule entries.
+- Whether “Women’s Bible Stories” is the intended title; the source title is preserved.
+
+Accessibility, parking, children’s check-in, individual sermon recordings, and leadership details remain pending. No merge or deployment is authorized by this handoff.

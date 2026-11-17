@@ -3,7 +3,10 @@
     "name": "Garden Community Fellowship",
     "email": "gcf.online.studios@gmail.com",
     "youtube": "https://www.youtube.com/@gardencommunityfellowshipg7681",
-    "twitch": "https://www.twitch.tv/rootedgcf"
+    "twitch": "https://www.twitch.tv/rootedgcf",
+    "phone": "661-301-2451",
+    "mailingAddress": "PO Box 536, Lake Isabella, CA 93240",
+    "motto": "A place where people flourish"
   },
   "ministries": [
     {
@@ -17,46 +20,131 @@
       "id": "men",
       "name": "Men’s Ministry",
       "category": "Connection",
-      "description": "Discover opportunities to connect through men’s ministry. Gathering details will be shared here.",
+      "description": "Connect through Men’s Bible Study, Tuesdays from 6:00–8:00 PM.",
       "symbol": "02"
     },
     {
       "id": "recovery",
       "name": "Celebrate Recovery",
       "category": "Support & community",
-      "description": "Join Celebrate Recovery on Mondays at 7 PM. Contact us for location and further details.",
+      "description": "Celebrate Recovery meets Mondays from 7:00–9:00 PM. Doors open at 6:15 PM.",
       "symbol": "03"
     }
   ],
   "gatherings": [
     {
-      "id": "connect",
-      "title": "Connect Café",
-      "day": "Every Monday",
-      "time": "6 PM",
-      "description": "Make room for connection at Connect Café.",
-      "category": "Community"
+      "id": "prayer",
+      "title": "Prayer",
+      "day": "Every Sunday",
+      "time": "8:00–8:40 AM",
+      "description": "Begin Sunday with prayer.",
+      "category": "Prayer",
+      "recurrence": "weekly"
     },
     {
-      "id": "cross-talk",
-      "title": "Cross Talk Café",
-      "day": "Every Monday",
-      "time": "6:15 PM",
-      "description": "Connect with the community at Cross Talk Café.",
-      "category": "Community"
+      "id": "sunday-school",
+      "title": "Adult Sunday School",
+      "day": "Every Sunday",
+      "time": "8:45–9:45 AM",
+      "description": "Gather for Adult Sunday School before the service.",
+      "category": "Bible study",
+      "recurrence": "weekly"
+    },
+    {
+      "id": "sunday-service",
+      "title": "Sunday Service",
+      "day": "Every Sunday",
+      "time": "10:00 AM–12:00 PM",
+      "description": "Join us for Sunday worship.",
+      "category": "Worship",
+      "recurrence": "weekly"
     },
     {
       "id": "recovery",
       "title": "Celebrate Recovery",
       "day": "Every Monday",
-      "time": "7 PM",
-      "description": "Gather with Celebrate Recovery. Please contact us for location and program details.",
-      "category": "Recovery"
+      "time": "7:00–9:00 PM",
+      "description": "Doors open at 6:15 PM.",
+      "category": "Recovery",
+      "recurrence": "weekly"
+    },
+    {
+      "id": "mens-study",
+      "title": "Men’s Bible Study",
+      "day": "Every Tuesday",
+      "time": "6:00–8:00 PM",
+      "description": "Study the Bible together.",
+      "category": "Bible study",
+      "recurrence": "weekly"
+    },
+    {
+      "id": "coed-study",
+      "title": "Co-Ed Bible Study",
+      "day": "Every Wednesday",
+      "time": "5:00–7:00 PM",
+      "description": "Gather for Co-Ed Bible Study.",
+      "category": "Bible study",
+      "recurrence": "weekly"
+    },
+    {
+      "id": "womens-stories",
+      "title": "Women’s Bible Stories",
+      "day": "Every Thursday",
+      "time": "6:00–8:00 PM",
+      "description": "Join Women’s Bible Stories, as named in the church schedule.",
+      "category": "Bible study",
+      "recurrence": "weekly"
+    },
+    {
+      "id": "praise-worship",
+      "title": "Night of Praise and Worship",
+      "day": "First Friday of each month",
+      "time": "6:00–8:00 PM",
+      "description": "A monthly evening of praise and worship.",
+      "category": "Worship",
+      "recurrence": "monthly"
+    },
+    {
+      "id": "communion-potluck",
+      "title": "Communion and Potluck Meal",
+      "day": "First Sunday of each month",
+      "time": "Time to be confirmed",
+      "description": "The church schedule does not specify a separate time. Please contact us before planning your visit.",
+      "category": "Fellowship",
+      "recurrence": "monthly"
+    },
+    {
+      "id": "step-study",
+      "title": "Celebrate Recovery Step Study",
+      "day": "Sunday · recurrence to be confirmed",
+      "time": "4:00–6:00 PM",
+      "description": "Please confirm whether this meets every Sunday or only the first Sunday of each month before attending.",
+      "category": "Recovery",
+      "recurrence": "unconfirmed"
     }
   ],
   "announcements": [],
   "sermons": [],
-  "bibleStudies": [],
+  "bibleStudies": [
+    {
+      "id": "mens-study",
+      "title": "Men’s Bible Study",
+      "description": "Study the Bible together.",
+      "schedule": "Every Tuesday, 6:00–8:00 PM"
+    },
+    {
+      "id": "coed-study",
+      "title": "Co-Ed Bible Study",
+      "description": "Gather for Co-Ed Bible Study.",
+      "schedule": "Every Wednesday, 5:00–7:00 PM"
+    },
+    {
+      "id": "womens-stories",
+      "title": "Women’s Bible Stories",
+      "description": "Join Women’s Bible Stories, as named in the church schedule.",
+      "schedule": "Every Thursday, 6:00–8:00 PM"
+    }
+  ],
   "outreach": [],
   "volunteerOpportunities": [],
   "visit": {
@@ -65,7 +153,12 @@
     "accessibility": null
   },
   "branding": {
-    "banner": null,
+    "banner": {
+      "src": "/uploads/gcf-banner.webp",
+      "alt": "Garden Community Fellowship — oak tree, wooden cross, sunrise, and mountain landscape",
+      "width": 2172,
+      "height": 724
+    },
     "bannerAlt": "Garden Community Fellowship — oak tree, wooden cross, sunrise, and mountain landscape"
   },
   "connections": [
@@ -105,5 +198,197 @@
       "url": null,
       "status": "pending"
     }
-  ]
+  ],
+  "scheduleNotes": [
+    {
+      "id": "step-study",
+      "title": "Step Study recurrence",
+      "description": "The Sunday Step Study is listed at 4:00–6:00 PM. Whether it meets weekly or on the first Sunday only is awaiting confirmation."
+    },
+    {
+      "id": "cafes",
+      "title": "Monday café gatherings",
+      "description": "Connect Café and Cross Talk Café times are awaiting confirmation alongside the official Celebrate Recovery doors-open time of 6:15 PM. Contact us for current café details."
+    }
+  ],
+  "beliefs": {
+    "statement": [
+      "We believe the Bible, both the Old and New Testaments, are inspired by God and the revelation of God to man, the only infallible, authoritative rule of faith and conduct.",
+      "We believe in the one true Triune God, eternally manifested in the Father, Son, and Holy Spirit, who created man (male and female) by a direct act.",
+      "We believe in the pre-existence, incarnation, virgin birth, sinless life, miracles, substitutionary atoning death, bodily resurrection, ascension to the right hand of the Father, and the second coming of the Lord Jesus Christ.",
+      "We believe in the fall of man, the need for regeneration by the operation of the Holy Spirit, on the sole basis of grace, and the resurrection of all to eternal life or damnation.",
+      "We believe that fallen mankind’s only hope of redemption is through the shed blood of Jesus Christ, the Son of God, and that salvation is received through repentance toward God and faith toward the Lord Jesus Christ, evidenced inwardly by the Holy Spirit and outwardly through a life of righteousness and true holiness.",
+      "We believe in the spiritual fellowship of believers in Christ, living a life of righteous works, separation from the world, and being witnesses of His saving grace.",
+      "We believe that marriage is a God-ordained institution between one man and one woman and is legitimate only as such.",
+      "We believe that the only moral context for sexual relations is between a husband and wife in marriage.",
+      "We believe biological sex and gender are immutable characteristics given by God as a part of His design and plan for the individual. Every human life is valuable and created in the image of God from conception and worthy of respect and protection until death."
+    ],
+    "articles": [
+      {
+        "id": "the-godhead-trinity",
+        "title": "The Godhead (Trinity)",
+        "paragraphs": [
+          "We believe in one true God Omnipotent, Omniscient, Omnipresent, and eternally existing in three distinct persons (Father, Son, and Holy Spirit) each of Whom is fully and equally God, holding all of the divine nature and attributes of God, and is fully worthy of our worship, praise, and service.",
+          "(Deut. 6:4; Matt. 28:19; John 1:14, John 10:30; 2 Cor. 13:14)"
+        ]
+      },
+      {
+        "id": "god-the-father",
+        "title": "God the Father",
+        "paragraphs": [
+          "We believe that God the Father has been revealed to us as the first person of the Trinity and is the eternal, unchanging, all-powerful, all-knowing, all-wise, all-loving, completely just, and perfectly holy, sovereign Ruler and Sustainer of the universe. He is the Father of our Lord and Savior Jesus Christ and of all true believers.",
+          "(Gen. 1:1; Eph. 4:6; John 1:12-13, John 5:19-21, John 17:1-5; Isa. 40:21-28, Isa. 43:10-13, Isa. 46:8-11; Rom. 8:14-16)"
+        ]
+      },
+      {
+        "id": "god-the-son",
+        "title": "God the Son",
+        "paragraphs": [
+          "We believe that Jesus Christ has been revealed to us (by the Holy Scriptures) as the second person of the Trinity and is the only begotten Son of God Who became God incarnate to reveal Himself to man, to fulfill prophecy, and to become the Savior of the lost world. In becoming man, Jesus did not cease in any way to be God in that He is fully God and fully man, inseparably united in one person forever. Jesus was miraculously conceived by the Holy Spirit; born of the Virgin Mary; lived a sinless life; died on the cross as the substitutionary and all-sufficient atoning sacrifice for all sin, of all men, of all time. He was buried; bodily rose from the dead; physically ascended into heaven in His glorified, resurrected body; is seated at the right hand of the Father; performing His ministry of intercession; and will come again to earth in bodily form, personally and visibly, to conclude human history and consummate God’s eternal plan by executing judgment and ushering in His eternal Kingdom.",
+          "(John 1:1,14, John 1:18; John 3:16; Luke 1:30-35; Phil. 2:5-8; Col. 1:15-20, 2:3,9; Mark 10:45; Acts 2:22-24; John 1:29; Rom. 3:25-26; Heb. 10:5-14; 1 Pet. 2:24, 1 Pet. 3:18; John 20:20; Phil. 3:20-21; Heb. 1:3; Rom. 8:34; 1 John 2:1; Acts 1:11; Heb. 9:28; 1 Thes. 4:13-18; Matt. 24:44; Rev. 19:11-21; Rev. 21-22)"
+        ]
+      },
+      {
+        "id": "god-the-holy-spirit",
+        "title": "God the Holy Spirit",
+        "paragraphs": [
+          "We believe that the Holy Spirit has been revealed as the third person of the Trinity. He is the primary agent for the conviction of sin and for the restoration of those who believe. Simultaneously with salvation, the Holy Spirit imparts new life, baptizes the believer into the body of Christ (His church), permanently indwells the believer, and seals the believer for the day of redemption. The Holy Spirit fills, directs, and guides those believers who are yielded to Him. He enables believers to bear fruit, and empowers believers to live a life free from sin’s dominion. We also believe that the Holy Spirit gives spiritual gifts to believers for the purpose of edifying the church in accordance with the teachings of scripture.",
+          "(1 Cor. 13:8, 1 Cor. 14:22; John 16:7-8; 1 Cor. 6:19, 1 Cor. 12:13; Eph. 1:13-14, Eph. 4:30; Gal. 5:16-17, Gal. 22-23; Rom. 8:5-13; 1 Pet. 4:10-11; Rom. 12:3-8)"
+        ]
+      },
+      {
+        "id": "inerrancy-of-scripture-and-the-bible",
+        "title": "Inerrancy of Scripture and the Bible",
+        "paragraphs": [
+          "We believe that the 66 Canonized books of the Old and New Testaments constitute the Holy Scriptures (Sola Scriptura). The Holy Bible is the inspired Word of God and men of God “were moved by the Holy Spirit” to write the very words of Scripture. The Bible is therefore without error (inerrant) in its original manuscripts and God has preserved its message throughout the translations (not paraphrases) we read today. God has supernaturally preserved the Bible, and it is the sole and final authority for faith and life, providing encouragement, guidance, comfort, and instruction for training in righteousness.",
+          "Both in the Old and New Testaments life is offered ultimately through Christ, who is the only Mediator between God and humanity. The New Testament teaches Christians how to fulfill the moral principles of the Old Testament, calling for loving obedience and submission to God made possible by the indwelling presence of His Holy Spirit.",
+          "(2 Tim. 3:16-17; 2 Pet. 1:20-21)"
+        ]
+      },
+      {
+        "id": "man",
+        "title": "Man",
+        "paragraphs": [
+          "We believe that the two greatest commandments which require us to “love the Lord your God with all our heart, with all your soul, with all your mind, and with all your strength,” and to, “love your neighbor as yourself,” summarize the divine law as it is revealed in the Scriptures. We believe that humans were created male and female in the image of God by a direct act of God and did not come into being as the result of evolution. We believe biological sex and gender are immutable characteristics given by God as a part of His design and plan for the individual. Every human is created in the image of God from conception, is valuable, and worthy of respect and protection until death. We believe that God created Man and Woman as separate but equally important beings for the purpose of glorifying, worshiping, serving Him, and to have fellowship with Him.",
+          "Man fell through sin by disobeying God, thus incurring both physical and spiritual death, which alienated him from God. Man’s nature was thus corrupted and he is utterly lost and spiritually, “dead in trespasses and sins,” completely incapable of saving himself and coming back into right relationship with God by his own merit or effort.",
+          "(Gen. 1:26, Gen. 2:6,17, Gen. 3:17-24; Isa. 59:1-2; Mark 12:30-31Rom. 3:9-19,23, Rom. 5:8; Luke 18:26-27; Eph. 2:1, 2:13)"
+        ]
+      },
+      {
+        "id": "salvation",
+        "title": "Salvation",
+        "paragraphs": [
+          "We believe that Jesus Christ paid the ultimate price for the sins of all mankind and His sacrifice and shed blood on the cross provides the sole basis for forgiveness of sins and salvation, which is the free gift of God’s grace. Repentance is a turning toward God and away from sin and is a part of (but not separate from) believing faith. “The Gospel is the power of God for salvation to everyone who believes,” and those who receive Jesus Christ by faith are born again, their sins forgiven, become children of God, are a new creation in Christ. Believers are sealed by the Holy spirit unto the day of redemption, being kept by the power of God.",
+          "(Eph. 1:7,13-14; John 1:12-13, John 3:1-7, John 14-16; 2 Cor. 5:17; Rom. 1:16, Rom. 10:9-10; Eph. 2:8-10; Rom. 8:14-17, Rom. 31-39; John 10:27-29, Rom. 14:6; Acts 26:20; 1 Pet. 1:3-5)"
+        ]
+      },
+      {
+        "id": "the-atonement",
+        "title": "The Atonement",
+        "paragraphs": [
+          "We believe that Christ’s offering of Himself as a sacrifice, “once and for all,” through His sufferings and meritorious death on the cross, provides the perfect redemption and atonement for the sins of the whole world, both original sin and actual sin. There is no other grounds for salvation from sin, but that alone. This atonement is sufficient for every individual of Adam’s race. It is unconditionally effective in the salvation of those mentally incompetent from birth, of those converted persons who have become mentally incompetent, and of children under the age of accountability. But it is effective for the salvation of those who reach the age of accountability only when they repent and exercise faith in Christ.",
+          "(Isa. 52:13-53:12; Luke 24:46-47; John 3:16; Acts 3:18; 4:12; Rom. 3:20, 24-26; 5:8-11, 13, 18-20; 7:7; 8:34; 1 Cor. 6:11; 15:22; Gal. 2:16; 3:2-3; Eph. 1:7; 2:13, 16; 1 Tim. 2:5-6; Heb. 7:23-27; 9:11-15, 24-28; 10:14;1 John 2:2; 4:10; Heb. 10:4-10)"
+        ]
+      },
+      {
+        "id": "the-church",
+        "title": "The Church",
+        "paragraphs": [
+          "We believe that the Church is the body of Christ of which Jesus is the Head, and whose members are those who have truly received Christ by faith. The Church includes both those believers who have gone to be with the Lord and those who remain on the earth, having renounced the world, the flesh, and the devil, and having dedicated themselves to the work which Christ committed unto His church until He comes.",
+          "The local church is a tangible expression of the body of Christ in a particular location. Since all members of the body of Christ are united in Christ by the same Spirit, they are commanded to live in love, harmony, and unity, being intent on the same purpose and accepting those practices which are based on a sincere interpretation of the Bible. These interpretations should not relate to essential doctrinal matters, and should not, in practice, cause disunity or hinder the ministry.",
+          "The purpose of the church is to make Christ known to lost men and to make disciples and glorify God on earth.",
+          "(Acts 1:8; 1 Cor. 12:12-27; Eph. 1:20-23, Eph. 4:1-6, Eph. 4:12-16; Matt. 28:18-20; John 17; Col. 1:24-29)"
+        ]
+      },
+      {
+        "id": "marriage-and-the-family",
+        "title": "Marriage and the Family",
+        "paragraphs": [
+          "We believe that every person is created in the image of God, that marriage is between one man and one woman and reflects that image in terms of intimate love, communication, fellowship, subordination of the self to the larger whole, and fulfillment. God’s Word makes use of the marriage relationship as the supreme metaphor for His relationship with His covenant people, and for revealing the truth of that relationship as one God with one people. Therefore, God’s plan for human sexuality is to be expressed only in a monogamous lifelong relationship between one man and one woman within the framework of marriage. This is the only relationship which is divinely designed for the birth and rearing of children and is a covenant union made in the sight of God, taking priority over every other human relationship.",
+          "(Gen. 1:27-28; 2:18, 20, 23-24; Isa. 54:4-8; 62:5b; Jer. 3:14; Ezek. 16:3ff.; Hosea 2; Mal. 2:14; Matt. 19:4-6; Mark 10:9; John 2:1-2, 11; 1 Cor. 9:5; Eph. 5:23-32; 1 Tim. 5:14; Heb. 13:4; Rev. 19:7-8)"
+        ]
+      },
+      {
+        "id": "personal-choice",
+        "title": "Personal Choice",
+        "paragraphs": [
+          "We believe that humanity’s creation in the image of God includes free will - the ability to choose between right and wrong. Thus, individuals were made morally responsible for their choices. But since the fall of Adam, people are unable, in their own strength, to do what is right continually. This is due to original sin, which is not simply the following of Adam’s example, but rather the corruption of the nature of each human and is reproduced naturally in Adam’s descendants. Because of this, humans are far removed from original righteousness, and by nature are continually inclined to evil. They cannot of themselves call upon God or exercise faith for salvation. Only through Jesus Christ the grace of God makes possible what humans in self-effort cannot do. It is bestowed freely upon all, enabling all who will, to turn and be saved.",
+          "(Gen. 6:5; 8:21; Deut. 30:19; Josh. 24:15; 1 Kings 20:40; Ps. 51:5; Isa. 64:6; Jer. 17:9; Mark 7:21-23; Luke 16:15; John 7:17; Rom. 3:10-12; 5:12-21; 1 Cor. 15:22; Eph. 2:1-3; 1 Tim. 2:5; Titus 3:5; Heb. 11:6;Rev. 22:17)"
+        ]
+      },
+      {
+        "id": "repentance-and-faith",
+        "title": "Repentance and Faith",
+        "paragraphs": [
+          "We believe that for men and women to appropriate what God’s grace has made possible, they must voluntarily respond in repentance and faith. The ability comes from God, but the act is the individual’s free will.",
+          "Repentance is prompted by the convicting ministry of the Holy Spirit. It involves a willful change of mind that renounces sin and longs for righteousness, a godly sorrow for and a confession of past sins, proper restitution for wrongdoings, and a resolution to reform the life. Repentance is the precondition for saving faith, and without it saving faith is impossible. Faith, in turn, is the only condition of salvation."
+        ]
+      },
+      {
+        "id": "justification-regeneration-and-adoption",
+        "title": "Justification, Regeneration and Adoption",
+        "paragraphs": [
+          "We believe that when one repents of personal sin and believes on the Lord Jesus Christ, that at the same moment that person is justified, regenerated, adopted into the family of God, and assured of personal salvation through the witness of the Holy Spirit.",
+          "We believe that justification is the judicial act of God whereby a person is accounted righteous, granted full pardon of all sin, delivered from guilt, completely released from the penalty of sin, which is death, by the merit of our Lord and Savior Jesus Christ, by faith alone, not on the basis of works.",
+          "We believe that regeneration, or the new birth, is that work of the Holy Spirit whereby, when one truly repents and believes, one’s moral nature is given a distinctively spiritual life with the capacity for love and obedience. This new life is received by faith in Jesus Christ. It enables the pardoned sinner to serve God with the will and affections of the heart; by it, the regenerate are delivered from the power of sin which reigns over all those who do not believe.",
+          "We believe that adoption is the act of God by which the justified and regenerated believer becomes a partaker of all rights, privileges, and responsibilities of a born-again child of God.",
+          "Justification: (Hab. 2:4; Acts 13:38-39; 15:11; 16:31; Rom. 1:17; 3:28; 4:2-5; 5:1-2; Gal. 3:6-14; Eph. 2:8-9; Phil 3:9; Heb. 10:38)",
+          "Regeneration: (John 1:12-13; 3:3, 5-8; 2 Cor. 5:17; Gal. 3:26; Eph. 2:5, 10, 19; 4:24; Col. 3:10; Titus 3:5; James 1:18; 1 Peter 1:3-4; 2 Peter 1:4; 1 John 3:1)",
+          "Adoption: (Rom. 8:15; Gal. 4:5, 7; Eph. 1:5)",
+          "Witness of the Spirit: (Rom. 8:16-17; Gal. 4:6; 1 John 2:3; 3:14, 18-19)"
+        ]
+      },
+      {
+        "id": "good-works",
+        "title": "Good Works",
+        "paragraphs": [
+          "We believe that although good works cannot save us from our sins or from God’s judgment, they are the fruit of faith and follow regeneration. Therefore, they are pleasing and acceptable to God in Christ, and by them a living faith may be as evidently known as a tree is discerned by its fruit.",
+          "(Matt. 5:16; 7:16-20; John 15:8; Rom 3:20; 4:2, 4, 6; Gal. 2:16; 5:6; Eph. 2:10; Phil. 1:11; Col. 1:10; 1 Thess. 1:3; Titus 2:14; 3:5; James 2:18, 22; 1 Peter 2:9, 12)"
+        ]
+      },
+      {
+        "id": "sin-after-regeneration",
+        "title": "Sin After Regeneration",
+        "paragraphs": [
+          "We believe that after we have experienced regeneration, it is possible to fall into sin, for in this life there is no such height or strength of holiness from which it is impossible to fall. But by the grace of God one who has fallen into sin may, by true repentance and faith, find forgiveness and restoration.",
+          "(Mal. 3:7; Matt. 18:21-22; John 15:4-6; 1 Tim. 4:1, 16; Heb. 10:35-39; 1 John 1:9; 2:1, 24-25)"
+        ]
+      },
+      {
+        "id": "the-sacraments-baptism-and-the-lord-s-supper",
+        "title": "The Sacraments: Baptism and the Lord’s Supper",
+        "paragraphs": [
+          "We believe that water baptism and the Lord’s Supper are the sacraments of the church commanded by Christ and ordained as a means of grace when received through faith. The sacraments are not a means of salvation. They are tokens of our profession of Christian faith and signs of God’s gracious ministry toward us. By them, He works within us to quicken, strengthen, and confirm our faith.",
+          "We believe that water baptism is a sacrament of the church, commanded by our Lord and administered to believers. It is a symbol of the new covenant of grace and signifies acceptance of the benefits of the atonement of Jesus Christ. By means of this sacrament, believers declare their faith in Jesus Christ as Savior.",
+          "(Matt. 3:13-17; 28:19; Mark 1:9-11; John 3:5, 22, 26; 4:1-2; Acts 2:38-39, 41; 8:12-17, 36-38; 9:18; 16:15, 33; 18:8; 19:5; 22:16; Rom 2:28-29; 4:11; 6:3-4; 1 Cor. 12:13; Gal. 3:27-29; Col. 2:11-12; Titus 3:5)",
+          "We believe that the Lord’s Supper is a sacrament of our redemption by Christ’s death and of our hope in His victorious return, as well as a sign of the love that Christians have for each other. To such as receive it humbly (with a proper spirit and by faith), the Lord’s Supper is made a means through which God communicates grace to the heart.",
+          "(Matt. 26:26-28; Mark 14:22-24; Luke 22:19-20; John 6:48-58; 1 Cor. 5:7-8; 10:3-4, 16-17; 11:23-29)"
+        ]
+      },
+      {
+        "id": "the-second-coming-of-christ",
+        "title": "The Second Coming of Christ",
+        "paragraphs": [
+          "We believe that the certainty of the personal and imminent return of Christ inspires holy living and zeal for the evangelization of the world. At His return He will fulfill all prophecies made concerning His final and complete triumph over evil.",
+          "(Job 19:25-27; Isa. 11:1-12; Zech. 14:1-11; Matt. 24:1-51; 25; 26:64; Mark 13:1-37; Luke 17:22-37; 21:5-36; John 14:1-3; Acts 1:6-11; 1 Cor. 1:7-8; 1 Thess. 1:10; 2:19; 3:13; 4:13-18; 5:1-11, 23; 2 Thess. 1:6-10; 2:1-12; Titus 2:11-14; Heb. 9:2728; James 5:7-8; 2 Peter 3:1-14; 1 John 3:2-3; Rev. 1:7; 19:1116; 22:6-7, 12, 20)"
+        ]
+      },
+      {
+        "id": "the-resurrection-of-the-dead",
+        "title": "The Resurrection of the Dead",
+        "paragraphs": [
+          "We believe in the bodily resurrection from the dead of all people—of the just unto the resurrection of life, and of the unjust unto the resurrection of damnation. The resurrection of Christ is the guarantee of the resurrection of all those who believe, which will occur at Christ’s Second Coming. The raised body will be a spiritual body, but the person will be whole and identifiable.",
+          "(Job 19:25-27; Dan. 12:2; Matt. 22:30-32; 28:1-20; Mark 16:18; Luke 14:14; 24:1-53; John 5:28-29; 11:21-27; 20:1-21:25; Acts 1:3; Rom. 8:11; 1 Cor. 6:14; 15:1-58; 2 Cor. 4:14; 5:1-11; 1 Thess. 4:13-17; Rev. 20:4-6, 11-13)"
+        ]
+      },
+      {
+        "id": "the-judgment-of-all-persons",
+        "title": "The Judgment of All Persons",
+        "paragraphs": [
+          "We believe that the Scriptures reveal God as the Just Judge of all. The acts of His judgment are based on His omniscience and eternal justice. His administration of judgment will culminate in the final meeting of all mankind (believers and non-believers) before His throne of great majesty and power, where books will be opened, records will be examined, and final rewards and punishments will be administered to all.",
+          "(Eccl. 12:14; Matt. 10:15; 25:31-46; Luke 11:31-32; Acts 10:42; 17:31; Rom. 2:16; 14:10-12; 2 Cor. 5:10; 2 Tim. 4:1; Heb. 9:27; 2 Peter 3:7; Rev. 20:11-13)"
+        ]
+      }
+    ]
+  }
 }

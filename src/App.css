@@ -1088,3 +1088,27 @@ main {
   padding: 10px;
   max-width: 115px;
 }
+
+/* Pastor content retains the traditional serif headings and restrained palette. */
+.beliefs { max-width: 850px; scroll-margin-top: 30px; }
+.beliefs h3 { margin-top: 36px; }
+.beliefs-intro, .faith-statement p, .faith-article p { line-height: 1.85; }
+.faith-statement { border-left: 2px solid #ad9359; padding-left: 25px; }
+.faith-article { max-width: none; scroll-margin-top: 30px; }
+.faith-article summary { font-size: 16px; gap: 20px; align-items: center; }
+.faith-article summary svg { flex-shrink: 0; }
+.faith-article[open] summary { color: #59451f; }
+.schedule-notes { margin-top: 35px; }
+.event-time { white-space: normal; max-width: 170px; }
+.event-time svg { flex-shrink: 0; }
+@media (max-width: 760px) {
+  .date-tile { width: 75px; min-width: 75px; }
+  .event-time { margin-left: 89px; max-width: calc(100% - 130px); }
+  .faith-statement { padding-left: 18px; }
+}
+.date-tile { height: auto; min-height: 78px; }
+@media (max-width: 760px) {
+  .date-tile { width: 90px; min-width: 90px; }
+  .event-time { margin-left: 104px; max-width: calc(100% - 145px); }
+}
+.notice > svg { flex-shrink: 0; }

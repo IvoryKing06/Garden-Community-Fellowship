@@ -21,6 +21,9 @@ import {
 } from "lucide-react";
 import {
   church,
+  beliefs,
+  scheduleNotes,
+  visit,
   gatherings,
   ministries,
   bibleStudies,
@@ -58,7 +61,11 @@ function Header() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const target = location.hash
+      ? document.getElementById(location.hash.slice(1))
+      : null;
+    if (target) target.scrollIntoView();
+    else window.scrollTo(0, 0);
     const page =
       pageInfo[
         (location.pathname.replace(/\/$/, "") || "/").replace(
@@ -115,6 +122,7 @@ function Header() {
               </summary>
               <div className="nav-dropdown">
                 <NavLink to="/about">About Us</NavLink>
+                <Link to="/about#what-we-believe">What We Believe</Link>
                 <NavLink to="/plan-your-visit">Plan Your Visit</NavLink>
               </div>
             </details>
@@ -214,7 +222,7 @@ function EventList() {
       {gatherings.map((g) => (
         <article className="event-row" key={g.id}>
           <div className="date-tile">
-            <span>{g.date ? "DATE" : "WEEKLY"}</span>
+            <span>{g.date ? "DATE" : g.recurrence === "monthly" ? "MONTHLY" : g.recurrence === "unconfirmed" ? "VERIFY" : "WEEKLY"}</span>
             <strong>{g.date ?? g.day.replace("Every ", "")}</strong>
           </div>
           {g.image && (
@@ -274,7 +282,7 @@ function Home() {
             </Link>
           </div>
           <div className="hero-note">
-            <span>Come as you are. Grow with us.</span>
+            <span>{church.motto}</span>
           </div>
         </div>
       </section>
@@ -287,8 +295,8 @@ function Home() {
           <div>
             <CalendarDays size={24} />
             <p>
-              <strong>Monday evenings</strong>
-              <span>Cafés from 6 PM · Celebrate Recovery at 7 PM</span>
+              <strong>{visit.sundayServiceTime}</strong>
+              <span>{visit.address}</span>
             </p>
           </div>
           <Link to="/events" className="text-link">
@@ -387,33 +395,29 @@ function About() {
           </h2>
           <p>
             Garden Community Fellowship is a church community. We invite you to
-            explore our ministries, connect at a Monday gathering, or join us
+            explore our ministries, join us for Sunday worship, or connect
             online.
           </p>
           <Button to="/connect">Start a conversation</Button>
         </div>
       </section>
-      <section className="section container info-grid">
-        {[
-          [
-            "Our mission",
-            "Our church-approved mission statement will be shared here.",
-          ],
-          [
-            "Our beliefs",
-            "Our church-approved statement of beliefs will be shared here.",
-          ],
-          [
-            "Our leadership",
-            "Meet our leadership team here soon. Names, photographs, and introductions are awaiting approval.",
-          ],
-        ].map(([title, text]) => (
-          <article className="info-card" key={title}>
-            <h3>{title}</h3>
-            <p>{text}</p>
-            <span className="status">Details coming soon</span>
-          </article>
+      <section className="section container beliefs" id="what-we-believe" aria-labelledby="beliefs-heading">
+        <Eyebrow>Our faith</Eyebrow>
+        <h2 id="beliefs-heading">What We Believe</h2>
+        <p className="beliefs-intro">Read Garden Community Fellowship’s Statement of Faith and explore the fuller Articles of Faith below. The text is drawn directly from the pastor-provided documents.</p>
+        <h3>Statement of Faith</h3>
+        <div className="faith-statement">
+          {beliefs.statement.map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+        </div>
+        <h3>Articles of Faith</h3>
+        <p>Expand an article to read its full text and Scripture references.</p>
+        {beliefs.articles.map((article) => (
+          <details key={article.id} id={article.id} className="faith-article">
+            <summary>{article.title}<ChevronDown size={18} aria-hidden="true" /></summary>
+            {article.paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+          </details>
         ))}
+        <p className="fine-print">Questions about our beliefs? <a className="text-link" href={`mailto:${church.email}`}>Email the church <ArrowRight size={16} /></a></p>
       </section>
     </>
   );
@@ -457,7 +461,7 @@ function Ministries() {
                 </summary>
                 <p>
                   {m.id === "recovery"
-                    ? "Celebrate Recovery meets Mondays at 7 PM. Connect Café is at 6 PM and Cross Talk Café is at 6:15 PM."
+                    ? "Celebrate Recovery meets Mondays from 7:00–9:00 PM. Doors open at 6:15 PM. Café times and Sunday Step Study recurrence are awaiting confirmation."
                     : "Schedules, age groups, and ministry leader information are awaiting confirmation."}{" "}
                   Email us for current information and location details.
                 </p>
@@ -503,11 +507,16 @@ function Events() {
         <div className="notice">
           <CalendarDays size={22} />
           <p>
-            These gatherings recur every Monday. Contact us to confirm holiday
-            schedules and locations.
+            Weekly and monthly gatherings follow the church schedule below.
+            Contact us to confirm holiday changes and any details marked as awaiting confirmation. All times are local to Lake Isabella, California.
           </p>
         </div>
         <EventList />
+        <aside className="schedule-notes info-card" aria-labelledby="schedule-notes-heading">
+          <h2 id="schedule-notes-heading">Schedule details to confirm</h2>
+          {scheduleNotes.map((note) => <div key={note.id}><h3>{note.title}</h3><p>{note.description}</p></div>)}
+          <a className="text-link" href={`mailto:${church.email}`}>Ask about the schedule <ArrowRight size={16} /></a>
+        </aside>
         <section className="section">
           <h2>Outreach</h2>
           {outreach.length ? (

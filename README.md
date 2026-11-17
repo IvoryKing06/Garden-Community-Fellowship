@@ -19,9 +19,9 @@ Tests run against the production preview, so build first. If Chromium is install
 
 ## Content and branding
 
-Edit `src/data/site.json`; `src/content-model.ts` defines the future CMS contract. Empty collections and null values render honest pending states. No invented address, Sunday service time, staff, beliefs, donation URL, or Bible study schedule is published. Existing Monday gatherings are preserved. Only user-supplied YouTube, Twitch, Discord, and email destinations are marked verified. Individual sermon recordings await verified URLs.
+Edit `src/data/site.json`; `src/content-model.ts` defines the future CMS contract. Empty collections and null values render honest pending states. The official Sunday and weekly/monthly schedule is integrated from the pastor’s schedule. Step Study recurrence, the separate communion/potluck time, and café details remain explicitly unconfirmed. What We Believe on `/about#what-we-believe` contains all nine Statement of Faith paragraphs and 19 expandable Articles of Faith, retaining the pastor’s wording and Scripture references. Leadership details remain deferred. All public inquiry links use gcf.online.studios@gmail.com; the verified donation, Discord, YouTube, and Twitch URLs are preserved. Facebook and unapproved ministry nicknames are excluded.
 
-The approved artwork reference is the wide oak-tree/cross/sunrise/mountain banner supplied by the church. The actual attached file was not available in the workspace, so `branding.banner` is null pending import. No generated replacement logo is used. The banner component preserves the complete image and lettering at every viewport. See [the branding handoff](docs/phase-2-plan.md#approved-banner) for import instructions. Fonts are self-hosted through Fontsource. No livestream players are embedded.
+The approved `gcf-banner.webp` is imported at `public/uploads/gcf-banner.webp` (2172 × 724, 263,564 bytes). The component displays the full composition and lettering without cropping on all viewports. The original remains at the repository root. Fonts are self-hosted through Fontsource. No livestream players are embedded.
 
 ## Deployment and Phase 2
 

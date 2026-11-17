@@ -21,6 +21,8 @@ export interface Gathering {
   time: string;
   description: string;
   category: string;
+  /** Supported display values: weekly, monthly, unconfirmed. */
+  recurrence: string;
   date?: string | null;
   location?: string | null;
   image?: ImageAsset | null;
@@ -45,7 +47,9 @@ export interface Opportunity {
   schedule: string | null;
 }
 export interface SiteContent {
-  church: { name: string; email: string; youtube: string; twitch: string };
+  church: { name: string; email: string; youtube: string; twitch: string; phone: string; mailingAddress: string; motto: string };
+  scheduleNotes: { id: string; title: string; description: string }[];
+  beliefs: { statement: string[]; articles: { id: string; title: string; paragraphs: string[] }[] };
   ministries: Ministry[];
   gatherings: Gathering[];
   announcements: Announcement[];
