@@ -1,6 +1,6 @@
 # Garden Community Fellowship
 
-Phase 1 website: React, TypeScript, Vite, and free-static-host-compatible output. Pages: Home, About Us, Plan Your Visit, Events & Outreach, Ministries & Bible Studies, Sermons, Get Involved, and Connect. Watch Live remains available, and the old Contact URL is preserved. Navigation groups About and Community pages to keep the header clear.
+Phase 1 website: React, TypeScript, Vite, and free-static-host-compatible output. Pages: Home, About Us, Plan Your Visit, Events & Outreach, Ministries & Bible Studies, Sermons, Get Involved, and Connect. Watch Live remains available, and the old Contact URL is preserved. The traditional cream masthead and navy navigation use burgundy accents, grouped About/Ministries dropdowns, and responsive mobile navigation. The homepage highlights service times, the source-backed church purpose, community, and involvement, followed by a ministry feature, three recurring events, and a Sunday visit card. See [the visual review gallery](docs/review/README.md) for desktop and mobile screenshots.
 
 ## Development and verification
 

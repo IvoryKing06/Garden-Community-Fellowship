@@ -1,7 +1,7 @@
 :root {
   font-family: "DM Sans", sans-serif;
-  color: #263e31;
-  background: #faf9f5;
+  color: #1b2c3e;
+  background: #fbf8f2;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +55,7 @@ h3 {
   line-height: 1.2;
 }
 p {
-  color: #5b665c;
+  color: #555b63;
   line-height: 1.8;
 }
 a,
@@ -100,7 +100,7 @@ summary:focus-visible {
   justify-content: center;
   gap: 24px;
   padding: 17px 23px;
-  background: #294d39;
+  background: #681f2b;
   color: #fff;
   font-size: 13px;
   font-weight: 500;
@@ -110,12 +110,12 @@ summary:focus-visible {
     transform 0.2s;
 }
 .button:hover {
-  background: #41634c;
+  background: #842e3d;
   transform: translateY(-2px);
 }
 .button.light {
-  background: #f4f1e7;
-  color: #294d39;
+  background: #faf2e4;
+  color: #681f2b;
 }
 .button.small {
   padding: 12px 17px;
@@ -140,7 +140,7 @@ summary:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #59654f;
+  color: #681f2b;
   margin-bottom: 20px;
   line-height: 1.6;
 }
@@ -153,7 +153,7 @@ summary:focus-visible {
   padding-block: 85px;
 }
 .soft {
-  background: #f0f1e9;
+  background: #f4eee3;
 }
 .fine-print {
   font-size: 12px;

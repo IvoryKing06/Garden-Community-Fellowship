@@ -11,6 +11,10 @@ import {
   ArrowRight,
   ArrowUpRight,
   CalendarDays,
+  BookOpen,
+  Users,
+  HeartHandshake,
+  MapPin,
   Check,
   ChevronDown,
   Clock3,
@@ -64,8 +68,10 @@ function Header() {
     const target = location.hash
       ? document.getElementById(location.hash.slice(1))
       : null;
-    if (target) target.scrollIntoView();
-    else window.scrollTo(0, 0);
+    if (target) {
+      if (target instanceof HTMLDetailsElement) target.open = true;
+      target.scrollIntoView();
+    } else window.scrollTo(0, 0);
     const page =
       pageInfo[
         (location.pathname.replace(/\/$/, "") || "/").replace(
@@ -86,12 +92,6 @@ function Header() {
   }, [location]);
   return (
     <>
-      <div className="announcement">
-        Rooted in faith. Growing in community.
-        <Link to="/watch">
-          Join us online <ArrowUpRight size={13} />
-        </Link>
-      </div>
       <header
         onClick={(event) => {
           if ((event.target as HTMLElement).closest("a")) setOpen(false);
@@ -99,6 +99,7 @@ function Header() {
       >
         <div className="container header-inner">
           <Brand />
+          <p className="header-motto">{church.motto}</p>
           <button
             className="menu-toggle"
             aria-label={open ? "Close navigation" : "Open navigation"}
@@ -108,9 +109,11 @@ function Header() {
           >
             {open ? <X /> : <Menu />}
           </button>
+        </div>
+        <div className="nav-shell">
           <nav
             id="navigation"
-            className={open ? "open" : ""}
+            className={`container ${open ? "open" : ""}`}
             aria-label="Main navigation"
           >
             <NavLink to="/" end>
@@ -118,29 +121,29 @@ function Header() {
             </NavLink>
             <details className="nav-group" key={`about-${location.pathname}`}>
               <summary>
-                About <ChevronDown size={13} />
+                About Us <ChevronDown size={13} />
               </summary>
               <div className="nav-dropdown">
                 <NavLink to="/about">About Us</NavLink>
                 <Link to="/about#what-we-believe">What We Believe</Link>
-                <NavLink to="/plan-your-visit">Plan Your Visit</NavLink>
               </div>
             </details>
+            <NavLink to="/plan-your-visit">Plan Your Visit</NavLink>
+            <NavLink to="/events">Events &amp; Outreach</NavLink>
             <details
               className="nav-group"
               key={`community-${location.pathname}`}
             >
               <summary>
-                Community <ChevronDown size={13} />
+                Ministries <ChevronDown size={13} />
               </summary>
               <div className="nav-dropdown">
-                <NavLink to="/events">Events &amp; Outreach</NavLink>
                 <NavLink to="/ministries">
                   Ministries &amp; Bible Studies
                 </NavLink>
-                <NavLink to="/get-involved">Get Involved</NavLink>
               </div>
             </details>
+            <NavLink to="/get-involved">Get Involved</NavLink>
             <NavLink to="/sermons">Sermons</NavLink>
             <NavLink to="/connect">Connect</NavLink>
           </nav>
@@ -173,56 +176,21 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
     </p>
   );
 }
-function SectionTitle({
-  label,
-  title,
-  children,
-}: {
-  label: string;
-  title: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <div className="section-title">
-      <div>
-        <Eyebrow>{label}</Eyebrow>
-        <h2>{title}</h2>
-      </div>
-      {children}
-    </div>
-  );
-}
-function MinistryCards() {
-  return (
-    <div className="ministry-grid">
-      {ministries.map((m, i) => (
-        <Link
-          to={`/ministries#${m.id}`}
-          className={`ministry-card ministry-${i}`}
-          key={m.id}
-        >
-          <div className="ministry-art">
-            <span>{m.symbol}</span>
-          </div>
-          <div className="card-body">
-            <span className="eyebrow">{m.category}</span>
-            <h3>{m.name}</h3>
-            <span className="text-link">
-              Find your place <ArrowUpRight size={17} />
-            </span>
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
-}
 function EventList() {
   return (
     <div className="event-list">
       {gatherings.map((g) => (
         <article className="event-row" key={g.id}>
           <div className="date-tile">
-            <span>{g.date ? "DATE" : g.recurrence === "monthly" ? "MONTHLY" : g.recurrence === "unconfirmed" ? "VERIFY" : "WEEKLY"}</span>
+            <span>
+              {g.date
+                ? "DATE"
+                : g.recurrence === "monthly"
+                  ? "MONTHLY"
+                  : g.recurrence === "unconfirmed"
+                    ? "VERIFY"
+                    : "WEEKLY"}
+            </span>
             <strong>{g.date ?? g.day.replace("Every ", "")}</strong>
           </div>
           {g.image && (
@@ -257,94 +225,172 @@ function EventList() {
   );
 }
 function Home() {
+  const featuredIds = ["recovery", "mens-study", "praise-worship"];
+  const featuredGatherings = featuredIds.flatMap((id) =>
+    gatherings.filter((g) => g.id === id),
+  );
+  const mission = beliefs.articles
+    .find((a) => a.id === "the-church")
+    ?.paragraphs.find((p) => p.startsWith("The purpose of the church"));
+  const recovery = ministries.find((m) => m.id === "recovery");
   return (
     <>
-      <OfficialBanner />
-      <section className="hero container">
-        <div className="hero-copy">
-          <Eyebrow>Welcome to Garden Community Fellowship</Eyebrow>
-          <h1>
-            A place to put
-            <br />
-            down <em>roots.</em>
-          </h1>
-          <p>
-            There’s room for you here. Discover a community where faith takes
-            root and life is shared, one connection at a time.
-          </p>
-          <div className="actions">
-            <Button to="/plan-your-visit">Plan your visit</Button>
-            <Link className="play-link" to="/watch">
-              <span>
-                <Play size={15} fill="currentColor" />
-              </span>
-              Watch online
-            </Link>
-          </div>
-          <div className="hero-note">
-            <span>{church.motto}</span>
-          </div>
-        </div>
-      </section>
-      <section className="gather-strip">
-        <div className="container gather-inner">
-          <div>
-            <span className="eyebrow">A little space in your week</span>
-            <h2>Let’s gather together.</h2>
-          </div>
-          <div>
-            <CalendarDays size={24} />
+      <section className="welcome-hero">
+        <div className="container welcome-inner">
+          <div className="welcome-copy">
+            <Eyebrow>{church.motto}</Eyebrow>
+            <h1>
+              Welcome to
+              <br />
+              Garden Community
+              <br />
+              Fellowship
+            </h1>
+            <span className="heading-rule" aria-hidden="true" />
             <p>
-              <strong>{visit.sundayServiceTime}</strong>
-              <span>{visit.address}</span>
+              There’s room for you here. Discover a community where faith takes
+              root and life is shared, one connection at a time.
             </p>
+            <div className="actions">
+              <Button to="/plan-your-visit">Plan Your Visit</Button>
+              <Link className="button secondary" to="/about">
+                Learn About Us
+              </Link>
+            </div>
           </div>
-          <Link to="/events" className="text-link">
-            Explore gatherings <ArrowRight size={18} />
-          </Link>
+          <div className="welcome-art">
+            <OfficialBanner />
+            <p>Our church’s approved illustrative artwork</p>
+          </div>
         </div>
       </section>
-      <section className="section container intro">
-        <div>
-          <Eyebrow>A community to call home</Eyebrow>
-          <h2>
-            Life is better <br />
-            when we grow together.
-          </h2>
-          <p>
-            Welcome to Garden Community Fellowship. Whether you’re taking a
-            first step or looking for a place to reconnect, we’d love to get to
-            know you.
-          </p>
-          <Link className="text-link" to="/about">
-            Our community <ArrowRight size={18} />
-          </Link>
+      <section className="home-highlights" aria-label="Life at Garden">
+        <div className="container highlights-grid">
+          <article>
+            <CalendarDays aria-hidden="true" />
+            <div>
+              <h2>Service Times</h2>
+              <p>
+                {visit.sundayServiceTime}
+                <br />
+                Weekly Bible studies &amp; gatherings
+              </p>
+              <Link to="/events">
+                View our schedule <ArrowRight size={14} />
+              </Link>
+            </div>
+          </article>
+          <article>
+            <BookOpen aria-hidden="true" />
+            <div>
+              <h2>Our Mission</h2>
+              <p>{mission}</p>
+              <Link to="/about#the-church">
+                From our Articles of Faith <ArrowRight size={14} />
+              </Link>
+            </div>
+          </article>
+          <article>
+            <Users aria-hidden="true" />
+            <div>
+              <h2>Our Community</h2>
+              <p>
+                A place where people flourish. Connect through Sunday worship,
+                Bible studies, and fellowship.
+              </p>
+              <Link to="/ministries">
+                Explore ministries <ArrowRight size={14} />
+              </Link>
+            </div>
+          </article>
+          <article>
+            <HeartHandshake aria-hidden="true" />
+            <div>
+              <h2>Get Involved</h2>
+              <p>
+                Interested in serving? Start a conversation with the church
+                about ways to participate.
+              </p>
+              <Link to="/get-involved">
+                Find your next step <ArrowRight size={14} />
+              </Link>
+            </div>
+          </article>
         </div>
       </section>
-      <section className="section soft">
-        <div className="container">
-          <SectionTitle
-            label="Find your community"
-            title="A place for every season."
-          >
-            <Link className="text-link" to="/ministries">
-              Explore ministries <ArrowRight size={18} />
+      <section
+        className="container home-columns"
+        aria-label="Connect this week"
+      >
+        <article className="ministry-feature">
+          <div className="feature-heading">
+            <HeartHandshake size={34} strokeWidth={1.3} aria-hidden="true" />
+            <p className="eyebrow">Support &amp; community</p>
+            <h2>{recovery?.name}</h2>
+          </div>
+          <div className="feature-body">
+            <p>{recovery?.description}</p>
+            <p>Make room for connection. We’d love to get to know you.</p>
+            <Link className="text-link" to="/ministries#recovery">
+              Learn about this ministry <ArrowRight size={16} />
             </Link>
-          </SectionTitle>
-          <MinistryCards />
-        </div>
-      </section>
-      <section className="section container">
-        <SectionTitle label="Life at Garden" title="Make room for connection.">
-          <Link className="text-link" to="/events">
-            All gatherings <ArrowRight size={18} />
+          </div>
+          <Link className="feature-footer" to="/sermons">
+            <Play size={17} aria-hidden="true" /> Explore sermons &amp;
+            recordings <ArrowRight size={16} />
           </Link>
-        </SectionTitle>
-        <EventList />
-        <p className="fine-print">
-          Planning a visit? Contact us for gathering locations and service
-          information.
-        </p>
+        </article>
+        <section className="featured-events" aria-labelledby="upcoming-heading">
+          <div className="home-section-heading">
+            <h2 id="upcoming-heading">Upcoming Events</h2>
+            <Link to="/events">
+              View All Events <ArrowRight size={14} />
+            </Link>
+          </div>
+          <p className="schedule-caption">
+            Featured recurring gatherings · all times local
+          </p>
+          {featuredGatherings.map((g) => (
+            <article className="featured-event" key={g.id}>
+              <div className="featured-day">{g.day.replace("Every ", "")}</div>
+              <div>
+                <h3>{g.title}</h3>
+                <p>{g.time}</p>
+                {g.id === "recovery" && (
+                  <p className="doors-note">{g.description}</p>
+                )}
+              </div>
+            </article>
+          ))}
+          <Link className="text-link full-schedule" to="/events">
+            Sunday, weekly &amp; monthly schedule <ArrowRight size={16} />
+          </Link>
+        </section>
+        <aside
+          className="sunday-card gather-strip"
+          aria-labelledby="sunday-heading"
+        >
+          <h2 id="sunday-heading">Join Us This Sunday</h2>
+          <div className="sunday-detail">
+            <CalendarDays aria-hidden="true" />
+            <div>
+              <h3>Sunday Worship</h3>
+              <p>{visit.sundayServiceTime}</p>
+            </div>
+          </div>
+          <div className="sunday-detail">
+            <MapPin aria-hidden="true" />
+            <div>
+              <h3>{church.name}</h3>
+              <p>{visit.address}</p>
+            </div>
+          </div>
+          <Button to="/plan-your-visit">Plan Your Visit</Button>
+          <p className="sunday-footnote">
+            Prayer and Adult Sunday School also meet on Sunday mornings.{" "}
+            <Link to="/events">See all service times.</Link>
+          </p>
+        </aside>
       </section>
       {announcements.length > 0 && (
         <section className="section container">
@@ -401,23 +447,43 @@ function About() {
           <Button to="/connect">Start a conversation</Button>
         </div>
       </section>
-      <section className="section container beliefs" id="what-we-believe" aria-labelledby="beliefs-heading">
+      <section
+        className="section container beliefs"
+        id="what-we-believe"
+        aria-labelledby="beliefs-heading"
+      >
         <Eyebrow>Our faith</Eyebrow>
         <h2 id="beliefs-heading">What We Believe</h2>
-        <p className="beliefs-intro">Read Garden Community Fellowship’s Statement of Faith and explore the fuller Articles of Faith below. The text is drawn directly from the pastor-provided documents.</p>
+        <p className="beliefs-intro">
+          Read Garden Community Fellowship’s Statement of Faith and explore the
+          fuller Articles of Faith below. The text is drawn directly from the
+          pastor-provided documents.
+        </p>
         <h3>Statement of Faith</h3>
         <div className="faith-statement">
-          {beliefs.statement.map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+          {beliefs.statement.map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
         </div>
         <h3>Articles of Faith</h3>
         <p>Expand an article to read its full text and Scripture references.</p>
         {beliefs.articles.map((article) => (
           <details key={article.id} id={article.id} className="faith-article">
-            <summary>{article.title}<ChevronDown size={18} aria-hidden="true" /></summary>
-            {article.paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+            <summary>
+              {article.title}
+              <ChevronDown size={18} aria-hidden="true" />
+            </summary>
+            {article.paragraphs.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
           </details>
         ))}
-        <p className="fine-print">Questions about our beliefs? <a className="text-link" href={`mailto:${church.email}`}>Email the church <ArrowRight size={16} /></a></p>
+        <p className="fine-print">
+          Questions about our beliefs?{" "}
+          <a className="text-link" href={`mailto:${church.email}`}>
+            Email the church <ArrowRight size={16} />
+          </a>
+        </p>
       </section>
     </>
   );
@@ -508,14 +574,26 @@ function Events() {
           <CalendarDays size={22} />
           <p>
             Weekly and monthly gatherings follow the church schedule below.
-            Contact us to confirm holiday changes and any details marked as awaiting confirmation. All times are local to Lake Isabella, California.
+            Contact us to confirm holiday changes and any details marked as
+            awaiting confirmation. All times are local to Lake Isabella,
+            California.
           </p>
         </div>
         <EventList />
-        <aside className="schedule-notes info-card" aria-labelledby="schedule-notes-heading">
+        <aside
+          className="schedule-notes info-card"
+          aria-labelledby="schedule-notes-heading"
+        >
           <h2 id="schedule-notes-heading">Schedule details to confirm</h2>
-          {scheduleNotes.map((note) => <div key={note.id}><h3>{note.title}</h3><p>{note.description}</p></div>)}
-          <a className="text-link" href={`mailto:${church.email}`}>Ask about the schedule <ArrowRight size={16} /></a>
+          {scheduleNotes.map((note) => (
+            <div key={note.id}>
+              <h3>{note.title}</h3>
+              <p>{note.description}</p>
+            </div>
+          ))}
+          <a className="text-link" href={`mailto:${church.email}`}>
+            Ask about the schedule <ArrowRight size={16} />
+          </a>
         </aside>
         <section className="section">
           <h2>Outreach</h2>
