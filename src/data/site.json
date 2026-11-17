@@ -60,8 +60,8 @@
   "outreach": [],
   "volunteerOpportunities": [],
   "visit": {
-    "address": null,
-    "sundayServiceTime": null,
+    "address": "2931 Erskine Creek Rd, Lake Isabella, CA 93240",
+    "sundayServiceTime": "Sundays, 10:00 AM–12:00 PM",
     "accessibility": null
   },
   "branding": {
@@ -86,12 +86,6 @@
       "name": "Discord",
       "url": "https://discord.gg/xsTmy9rEA",
       "status": "verified"
-    },
-    {
-      "id": "facebook",
-      "name": "Facebook",
-      "url": null,
-      "status": "pending"
     },
     {
       "id": "donations",
