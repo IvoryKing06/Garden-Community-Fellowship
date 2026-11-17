@@ -1,0 +1,69 @@
+# Pastor-provided content handoff (review before publishing)
+
+These details come from three pastor-supplied documents shared by the site owner:
+- `GCF Church Schedule.docx`
+- `Garden Community Fellowship Statement of Faith.docx`
+- `Garden Community Fellowship Articles of Faith.docx`
+
+This handoff is not an authorization to publish the original DOCX files or their entire contents verbatim. Do not publish the tax ID appearing in the Statement of Faith footer without express approval.
+
+## Public-branding and privacy decisions
+
+- Official motto from the Statement of Faith: **“A place where people flourish”**.
+- Do **not** publish, link, tease, or list Facebook, even as “pending”; that community is private.
+- Do **not** use proposed ministry nicknames such as **Oaks** or **Olive Branches**. No proposed nicknames should appear until independently approved.
+- The approved oak/cross/sunrise/mountain website banner remains the branding reference. Avoid substituting an unapproved logo.
+- Do not invent a leadership roster or any additional ministry names, ages, or times.
+
+## Church location and contact from the Statement of Faith
+
+- Meeting location: **2931 Erskine Creek Rd, Lake Isabella, CA 93240**.
+- Mailing address: **PO Box 536, Lake Isabella, CA 93240**.
+- Phone: **661-301-2451**.
+- Contact email printed on the pastor-supplied statement: **gardencommunityfellowship@gmail.com**.
+- Earlier website discussions identified **gcf.online.studios@gmail.com** for website/media/form notifications. **Ask the owner which public email and form notification recipient to use; do not silently substitute one for the other.**
+- Do not publish the church tax ID just because it appears in the source.
+
+## Official church schedule (from pastor's schedule)
+
+| When | Gathering | Time | Notes |
+| --- | --- | --- | --- |
+| Sunday | Prayer | 8:00–8:40 AM | |
+| Sunday | Adult Sunday School | 8:45–9:45 AM | |
+| Sunday | Sunday Service | 10:00 AM–12:00 PM | |
+| Monday | Celebrate Recovery | 7:00–9:00 PM | Doors open at 6:15 PM |
+| Tuesday | Men’s Bible Study | 6:00–8:00 PM | |
+| Wednesday | Co-Ed Bible Study | 5:00–7:00 PM | |
+| Thursday | Women’s Bible Stories | 6:00–8:00 PM | Preserve source title until clarified |
+| First Friday of each month | Night of Praise and Worship | 6:00–8:00 PM | |
+| First Sunday of each month | Communion and Potluck Meal | Not specified | Do not invent a separate time |
+| Sunday (verify whether every week or first Sunday) | Celebrate Recovery Step Study | 4:00–6:00 PM | Placement in document after “First Sunday” is ambiguous |
+
+Saturday is listed as having no scheduled activities; no need for a public “nothing happening” item.
+
+**Reconciliation needed:** Earlier site-owner details had Connect Café at 6:00 PM and Cross Talk Café at 6:15 PM on Monday. The pastor's newer written schedule says Celebrate Recovery doors open at 6:15 PM but does not mention the cafés. Do not silently claim these timings are confirmed by the pastor. Ask the site owner to confirm how the cafés relate to the doors-open note, and update any old “all events recur Monday” text before displaying the full schedule.
+
+## Beliefs content
+
+The pastor provided both a concise **Statement of Faith** and a seven-page **Articles of Faith**. The two are distinct documents. The site should present church-approved, faithful content from them—ideally a readable “What We Believe” page or section, with the concise statement and optional expandable articles.
+
+The short Statement of Faith includes, in the pastor's own formulation:
+- The Bible (Old and New Testaments) as inspired by God and the infallible authoritative rule of faith and conduct
+- The Triune God, Father, Son, and Holy Spirit
+- Jesus Christ's pre-existence, incarnation, virgin birth, sinless life, miracles, substitutionary death, bodily resurrection, ascension, and second coming
+- The fall of humanity, salvation by grace through repentance and faith in Jesus Christ, and the Holy Spirit's regeneration
+- The fellowship of believers, holiness, and works of faith
+- The church's stated beliefs about marriage, sexuality, gender, and the value of human life
+
+The full Articles of Faith expand these topics across: Trinity, Father, Son, Holy Spirit, Scripture, mankind, salvation, atonement, church, marriage and family, personal choice, repentance and faith, justification/regeneration/adoption, good works, sin after regeneration, baptism and the Lord's Supper, Christ's second coming, resurrection, and judgment.
+
+**Do not paraphrase doctrines as if they were approved exact wording or silently drop challenging passages.** Ask the owner to supply the actual DOCX documents directly to the Codex task if the full passages are needed, and request pastoral review before publishing the finished beliefs pages.
+
+## Implementation goals
+
+- Update the public Home and Plan Your Visit pages with verified Sunday worship time and street address.
+- Present a complete Sunday and weekday gathering schedule, including first-Friday recurring event and first-Sunday communion/potluck, while respecting ambiguous Step Study recurrence.
+- Keep reusable typed content data suitable for the later CMS.
+- Add phone and contact information cleanly, after the public-email decision.
+- Check responsive design, route prerender, accessibility, and tests. Update any tests assuming exactly three Monday event rows.
+- Never merge or deploy without review.
