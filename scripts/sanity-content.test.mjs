@@ -17,6 +17,7 @@ test("Sanity requires the five existing published singleton documents before syn
 test("team directory is optional until approved, with hidden profiles never exported", () => {
   const base = structuredClone(seed.filter((doc) => doc._id !== "teamPage"));
   assert.deepEqual(documentsToEditorial(base)["team.json"], { team: [] });
+  assert.deepEqual(documentsToEditorial([...base, { _id: "teamPage", _type: "teamPage" }])["team.json"], { team: [] });
   const team = structuredClone(seed.find((doc) => doc._id === "teamPage"));
   team.team.push({ id: "hidden-person", name: "Hidden", role: "Deacon", group: "Deacons", visibleOnWebsite: false });
   team.team.push({ id: "approved-person", name: "Approved Person", role: "Deacon", group: "Deacons", visibleOnWebsite: true });

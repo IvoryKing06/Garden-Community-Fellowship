@@ -74,6 +74,11 @@ export function documentsToEditorial(documents) {
     }
     const mapped = {};
     for (const key of config.keys) {
+      if (config.optional && document[key] == null) {
+        // Sanity may omit the array field on a newly published, still-empty team page.
+        mapped[key] = [];
+        continue;
+      }
       if (!Array.isArray(document[key])) throw new Error(`Sanity ${type}.${key} must be an array`);
       // A profile requires explicit staff approval before it can reach the public build.
       mapped[key] = document[key].filter((item) => {
