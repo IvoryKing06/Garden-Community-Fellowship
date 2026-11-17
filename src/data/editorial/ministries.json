@@ -1,0 +1,25 @@
+{
+  "ministries": [
+    {
+      "id": "sprouts",
+      "name": "Sprouts",
+      "category": "Children",
+      "description": "A place for our youngest community members. More information about Sprouts children’s ministry is coming soon.",
+      "symbol": "01"
+    },
+    {
+      "id": "men",
+      "name": "Men’s Ministry",
+      "category": "Connection",
+      "description": "Connect through Men’s Bible Study, Tuesdays from 6:00–8:00 PM.",
+      "symbol": "02"
+    },
+    {
+      "id": "recovery",
+      "name": "Celebrate Recovery",
+      "category": "Support & community",
+      "description": "Celebrate Recovery meets Mondays from 7:00–9:00 PM. Doors open at 6:15 PM.",
+      "symbol": "03"
+    }
+  ]
+}

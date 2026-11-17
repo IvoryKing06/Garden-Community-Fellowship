@@ -38,7 +38,7 @@ export interface Sermon {
   title: string;
   recordedOn: string | null;
   youtubeUrl: string;
-  image: ImageAsset | null;
+  image?: ImageAsset | null;
 }
 export interface Opportunity {
   id: string;
