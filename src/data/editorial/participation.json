@@ -1,0 +1,24 @@
+{
+  "bibleStudies": [
+    {
+      "id": "mens-study",
+      "title": "Men’s Bible Study",
+      "description": "Study the Bible together.",
+      "schedule": "Every Tuesday, 6:00–8:00 PM"
+    },
+    {
+      "id": "coed-study",
+      "title": "Co-Ed Bible Study",
+      "description": "Gather for Co-Ed Bible Study.",
+      "schedule": "Every Wednesday, 5:00–7:00 PM"
+    },
+    {
+      "id": "womens-stories",
+      "title": "Women’s Bible Stories",
+      "description": "Women’s Bible Stories is a time for women to come together, explore the lives and lessons of women in Scripture, encourage one another, and grow in faith and fellowship.",
+      "schedule": "Every Thursday, 6:00–8:00 PM"
+    }
+  ],
+  "outreach": [],
+  "volunteerOpportunities": []
+}

@@ -2,26 +2,39 @@
 
 Phase 1 uses static content only. No admin route, authentication endpoint, submission endpoint, payment integration, or prayer-request form is enabled.
 
-## Maintained CMS recommendation
+## Administrator login decision — November 17, 2026
 
-Use Decap CMS with its GitHub backend and an editorial review workflow. Its editor should manage `src/data/site.json` and upload assets under `public/uploads`. Editors work in a maintained CMS interface; they do not edit TypeScript. Plan for exactly 1–2 designated church administrators with individual GitHub accounts, MFA, least-privilege repository access, protected publishing branch, and reviewed publishing rights. Never use a shared administrator password. Repository authorization, not hiding an `/admin` URL, must enforce access. Revoke both repository membership and OAuth sessions when an administrator leaves.
+The site owner selected **email-based administrator sign-in, not GitHub sign-in for church staff**. GitHub remains the development repository, invisible to church administrators. Begin with two independently accessible administrator identities:
 
-Decap itself is open source; GitHub authentication requires a securely hosted OAuth broker or a supported identity integration. A static host alone cannot hold OAuth secrets. Phase 2 must confirm an actively supported backend, callback domain, allowed repository/users, CSRF/state protection, token handling, and free-tier availability before enabling editing. Do not assume legacy Netlify Identity/Git Gateway services are available. Keep credentials server-side. Avoid purchasing CMS seats or hosting without approval.
+- **Media administration** — the owner-confirmed GCF media mailbox (currently managed by the site owner).
+- **Pastoral administration** — the pastor's separate official church mailbox. The account must remain usable independently of the media account.
 
-`src/content-model.ts` is the typed content contract. The CMS collection should expose these fields (stable IDs are required):
+Do not hard-code the pastoral login address, passwords, or an admin allowlist into the publicly shipped site or public repository. Store memberships and roles in a provider-managed, access-controlled system. Only invited identities may sign in; verify identity server-side and authorize content writes separately from mere login. Add suitable MFA and recovery. Never ask church staff to share passwords in chat.
+
+When trusted media-team members join, **invite them to their own accounts with media permissions**, instead of reusing the original media credentials. This gives simple login while preserving an audit trail, individual revocation, and access for the pastor if a media member leaves. The owner's shared-login idea is a workflow preference to discuss, not a security requirement to silently implement.
+
+### CMS and authentication selection
+
+**Selected: Sanity Studio** (owner-approved November 17, 2026). The former draft Decap GitHub OAuth editor was retired. Church administrators will sign in to a separately hosted, private-to-members Sanity Studio using their own email/password accounts; GitHub is for developers only. Sanity manages the account invitation, authentication, and editor permissions, not a client-side email list. The pastor's login email must not be published in site code or public documentation.
+
+The current Sanity free plan allows up to 20 user seats with **Administrator and Viewer** project roles, but does not provide separate fine-grained pastor/media editing roles without an upgrade or custom workflow. For the approved initial setup, both trusted identities must be invited as administrators. Each person should enable offered two-step security, retain independent account recovery, and avoid password sharing. Extra staff should be invited individually only when trusted; project permissions and pricing must be reassessed before expanding the team.
+
+The `studio/` directory contains the configured editor with five approachable sections. Staff edit titles and content rather than raw JSON, GitHub, or technical IDs. It cannot be used until the church creates its own Sanity project, invites the two administrators, and hosts the Studio. No accounts, projects, tokens, payments, or deployment have been provisioned by this repository.
+
+`src/content-model.ts` is the typed content contract. The Sanity editor exposes these fields; technical IDs are assigned automatically and retained for existing links:
 
 | Collection/setting                  | Editor fields                                                                                  |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Announcements                       | ID, title, body, optional expiry                                                               |
-| Events/gatherings                   | ID, title, description, category, recurring day/time, optional confirmed date, location, image |
-| Ministries                          | ID, name, category, description, schedule, image; preserve IDs used by links                   |
-| Bible studies/outreach/volunteering | ID, title, description, confirmed schedule                                                     |
-| Sermons                             | ID, title, recording date, verified HTTPS YouTube recording URL, optional image                |
-| Visit/schedules                     | Confirmed address, Sunday service time, accessibility details                                  |
-| Connections                         | Name, verified URL or null, verified/pending status                                            |
-| Branding/images                     | Source path, descriptive alt text, intrinsic width and height                                  |
+| Announcements                       | Title, body, optional expiry                                                                   |
+| Events/gatherings                   | Title, description, category, recurring day/time, optional confirmed date, location, image     |
+| Ministries                          | Name, category, description, schedule, optional photo; preserve existing link IDs               |
+| Bible studies/outreach/volunteering | Title, description, confirmed schedule                                                         |
+| Sermons                             | Title, recording date, verified HTTPS individual YouTube recording URL, optional photo          |
+| Visit/schedules                     | Confirmed address, Sunday service time, accessibility details — deferred from routine editor   |
+| Connections                         | Name, verified URL or null, verified/pending status — deferred from routine editor             |
+| Branding/images                     | Approved hero banner remains outside routine editor; section photos have alt text and limits   |
 
-Null values and empty collections remain explicit pending states. A YouTube channel is not presented as an individual sermon. The public renderer accepts only supported HTTPS YouTube recording URLs for sermon entries. CMS validation and trusted publish-time validation should enforce URL allowlists, dates, required alt text, and image size limits before publication. Add image resize/compression on upload and preview drafts before publishing.
+Null values and empty collections remain explicit pending states. A YouTube channel is not presented as an individual sermon. The editor validates required inputs and video URLs; the site build separately validates dates, unique identifiers, images, and maximum 3 MB size and fails on invalid data. Section photos should be compressed before upload. Sanity has draft editing and a Publish action. A separate Netlify build/webhook connection is still needed for published changes to appear on the website.
 
 ## Approved banner
 

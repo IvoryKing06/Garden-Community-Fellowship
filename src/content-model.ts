@@ -4,6 +4,8 @@ export interface ImageAsset {
   alt: string;
   width: number;
   height: number;
+  /** Sanity CDN asset byte size, supplied by the content API. */
+  bytes?: number;
 }
 export interface Ministry {
   id: string;
@@ -13,6 +15,16 @@ export interface Ministry {
   symbol: string;
   schedule?: string | null;
   image?: ImageAsset | null;
+}
+/** Public profiles are centrally managed, not copied into each ministry. */
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  group: string;
+  bio?: string | null;
+  image?: ImageAsset | null;
+  visibleOnWebsite: boolean;
 }
 export interface Gathering {
   id: string;
@@ -38,7 +50,7 @@ export interface Sermon {
   title: string;
   recordedOn: string | null;
   youtubeUrl: string;
-  image: ImageAsset | null;
+  image?: ImageAsset | null;
 }
 export interface Opportunity {
   id: string;
@@ -51,6 +63,7 @@ export interface SiteContent {
   scheduleNotes: { id: string; title: string; description: string }[];
   beliefs: { statement: string[]; articles: { id: string; title: string; paragraphs: string[] }[] };
   ministries: Ministry[];
+  team: TeamMember[];
   gatherings: Gathering[];
   announcements: Announcement[];
   sermons: Sermon[];

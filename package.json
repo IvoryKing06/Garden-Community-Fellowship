@@ -5,8 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && vite build --ssr src/prerender.tsx --outDir .ssr && node .ssr/prerender.js",
+    "build": "npm run sync:sanity && npm run validate:content && tsc -b && vite build && vite build --ssr src/prerender.tsx --outDir .ssr && node .ssr/prerender.js",
     "lint": "oxlint",
+    "sync:sanity": "node scripts/pull-sanity-content.mjs",
+    "seed:sanity": "node scripts/create-sanity-seed.mjs",
+    "validate:content": "node scripts/validate-content.mjs",
+    "test:content": "node --test scripts/content-validation.test.mjs scripts/sanity-content.test.mjs",
     "preview": "vite preview",
     "test": "playwright test"
   },

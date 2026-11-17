@@ -9,6 +9,7 @@ test("all required pages load directly with accessible content and no browser er
   for (const path of [
     "/",
     "/about",
+    "/team",
     "/ministries",
     "/events",
     "/watch",
@@ -58,15 +59,14 @@ test("mobile navigation opens, routes, and closes without horizontal overflow", 
     .click();
   await expect(page).toHaveURL(/ministries/);
   await expect(toggle).toHaveAttribute("aria-expanded", "false");
-  await page.getByText("More information", { exact: true }).first().click();
-  await expect(
-    page.locator("#sprouts").getByText(/Schedules, age groups/),
-  ).toBeVisible();
+  await expect(page.locator(".ministry-card")).toHaveCount(6);
+  await expect(page.locator("#sprouts")).toContainText("Sprouts");
   for (const width of [360, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const path of [
       "/",
       "/about",
+      "/team",
       "/ministries",
       "/events",
       "/watch",
@@ -91,7 +91,7 @@ test("gathering times and official contact and channel links are correct", async
 }) => {
   await page.goto("/events");
   const events = page.locator(".event-row");
-  await expect(events).toHaveCount(10);
+  await expect(events).toHaveCount(9);
   for (const [title, time] of [
     ["Prayer", "8:00–8:40 AM"],
     ["Adult Sunday School", "8:45–9:45 AM"],
@@ -102,7 +102,6 @@ test("gathering times and official contact and channel links are correct", async
     ["Women’s Bible Stories", "6:00–8:00 PM"],
     ["Night of Praise and Worship", "6:00–8:00 PM"],
     ["Communion and Potluck Meal", "Time to be confirmed"],
-    ["Celebrate Recovery Step Study", "4:00–6:00 PM"],
   ]) {
     await expect(
       events.filter({
@@ -113,9 +112,7 @@ test("gathering times and official contact and channel links are correct", async
   await expect(events.filter({ hasText: "Night of Praise" })).toContainText(
     "MONTHLY",
   );
-  await expect(events.filter({ hasText: "Step Study" })).toContainText(
-    "recurrence to be confirmed",
-  );
+  await expect(page.locator("body")).not.toContainText(/step study/i);
   await expect(page.getByRole("complementary")).toContainText("café");
   await expect(events.filter({ hasText: "Café" })).toHaveCount(0);
   await page.goto("/watch");
@@ -190,6 +187,7 @@ test("static HTML contains route-specific content before JavaScript", async ({
   const page = await context.newPage();
   for (const [route, title] of [
     ["/about", "About Us"],
+    ["/team", "Meet the Team"],
     ["/plan-your-visit", "Plan Your Visit"],
     ["/sermons", "Sermons"],
     ["/get-involved", "Get Involved"],
@@ -236,6 +234,7 @@ test("pastor beliefs, official banner and inquiry addresses remain intact", asyn
   for (const route of [
     "/",
     "/about",
+    "/team",
     "/events",
     "/ministries",
     "/plan-your-visit",
@@ -302,7 +301,22 @@ test("homepage highlights approved content and routes visitors to full details",
   await page
     .getByRole("link", { name: "View All Events", exact: true })
     .click();
-  await expect(page.locator(".event-row")).toHaveCount(10);
+  await expect(page.locator(".event-row")).toHaveCount(9);
+});
+
+test("six ministries and a centrally managed team page appear without public Step Study details", async ({ page }) => {
+  await page.goto("/ministries");
+  await expect(page.locator(".ministry-card")).toHaveCount(6);
+  for (const name of ["Seeds", "Sprouts", "Roots", "Men’s Ministry", "Women’s Ministry", "Celebrate Recovery"]) {
+    await expect(page.locator(".ministry-card").getByRole("heading", { name, exact: true })).toBeVisible();
+  }
+  await expect(page.locator("body")).not.toContainText(/step study/i);
+  await page.goto("/team");
+  await expect(page.getByRole("heading", { name: "Meet the Team." })).toBeVisible();
+  await expect(page.locator(".team-card")).toHaveCount(0);
+  await expect(page.locator(".team-empty")).toContainText("preparing introductions");
+  await page.getByRole("navigation").locator("summary").filter({ hasText: "About" }).click();
+  await expect(page.getByRole("navigation").getByRole("link", { name: "Meet the Team" })).toBeVisible();
 });
 
 test("final polish keeps compact recurring badges and accessible map directions", async ({
@@ -373,6 +387,7 @@ test("capture desktop and mobile review screenshots", async ({ page }) => {
       ["home", "/"],
       ["schedule", "/events"],
       ["beliefs", "/about"],
+      ["team", "/team"],
       ["visit", "/plan-your-visit"],
       ["ministries", "/ministries"],
       ["sermons", "/sermons"],

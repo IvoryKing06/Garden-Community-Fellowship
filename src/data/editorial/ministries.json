@@ -1,0 +1,46 @@
+{
+  "ministries": [
+    {
+      "id": "seeds",
+      "name": "Seeds",
+      "category": "Infants",
+      "description": "Our infant ministry at the Garden. Details about care and check-in will be shared once they are confirmed.",
+      "symbol": "01"
+    },
+    {
+      "id": "sprouts",
+      "name": "Sprouts",
+      "category": "Children",
+      "description": "A place for our youngest community members. More information about Sprouts children’s ministry is coming soon.",
+      "symbol": "02"
+    },
+    {
+      "id": "roots",
+      "name": "Roots",
+      "category": "Teens",
+      "description": "Our teen ministry at the Garden. Meeting times and age-group details will be shared once confirmed.",
+      "symbol": "03"
+    },
+    {
+      "id": "men",
+      "name": "Men’s Ministry",
+      "category": "Connection",
+      "description": "Connect through Men’s Bible Study, Tuesdays from 6:00–8:00 PM.",
+      "symbol": "04"
+    },
+    {
+      "id": "women",
+      "name": "Women’s Ministry",
+      "category": "Connection",
+      "description": "A place for women to connect and grow in faith. Ministry gathering details are coming soon.",
+      "symbol": "05"
+    },
+    {
+      "id": "recovery",
+      "name": "Celebrate Recovery",
+      "category": "Support & community",
+      "description": "Celebrate Recovery meets Mondays from 7:00–9:00 PM. Doors open at 6:15 PM.",
+      "symbol": "06"
+    }
+  ]
+}
