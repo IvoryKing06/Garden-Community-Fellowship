@@ -1,6 +1,14 @@
-# Phase 2A/B: content-management and Sanity editor scaffold (draft, not active)
+# Phase 2A/B: content-management and Sanity editor rollout (draft PR)
 
-This branch implements the owner-approved Sanity Studio editor without changing the approved public content. **The studio, authentication, automated rebuilds, and online forms are not live.** Keep the PR in draft until invited-account access, publishing behavior, and hosting are confirmed.
+This branch implements the owner-approved Sanity Studio editor without changing the approved public content. **The Sanity Studio is hosted and its editing sections work; the Phase 2 public website preview, automatic rebuilds, and online forms are not live.** Keep the PR in draft until invited-account access, publishing behavior, and hosting are confirmed.
+
+## Rollout checkpoint (November 17, 2026)
+
+- Sanity project `gs8p6s6x` uses the public `production` dataset; the hosted editor is at `https://garden-community-fellowship.sanity.studio/`. After the singleton-registration fix was deployed, the media administrator verified that all five editing sections open.
+- Five reviewed singleton seed documents were imported. The website pull script successfully verified all five published Sanity sections against the live dataset. The pastor's independent administrator invitation was sent; acceptance and denied-access checks still need confirmation.
+- Netlify project `gcf-website-preview` was connected to the GitHub repository. Its existing published `main` build (`afea22a`) is Phase 1. The media administrator entered the non-secret build variables `SANITY_PROJECT_ID=gs8p6s6x`, `SANITY_DATASET=production`, `SANITY_CONTENT_REQUIRED=true`, and `NODE_VERSION=24`.
+- Netlify branch deploys were enabled specifically for `feature/website-phase-2-cms-foundation`; no Phase 2 Netlify preview had appeared in the deploy list at the time of this note. This documentation update is intended to trigger the first branch build; its outcome still needs verification.
+- Next: inspect the branch build and the live content it renders, confirm appropriate admin access, then configure a **private** Sanity-to-Netlify build hook. Do not merge to `main` or announce the site before review.
 
 ## What is ready for review
 
