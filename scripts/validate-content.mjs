@@ -38,6 +38,20 @@ export function validateYoutube(url) {
 }
 export function validateImage(asset, label) {
   if (asset == null) return;
+  if (typeof asset.src === "string" && asset.src.startsWith("https://cdn.sanity.io/images/")) {
+    required(asset.alt, label + ".alt");
+    if (!Number.isInteger(asset.width) || !Number.isInteger(asset.height) || asset.width < 1 || asset.height < 1 || asset.width > 10000 || asset.height > 10000) {
+      throw new Error(label + " requires sensible image dimensions");
+    }
+    const u = new URL(asset.src);
+    if (u.protocol !== "https:" || u.hostname !== "cdn.sanity.io" || u.search || !/^\/images\/[a-z0-9]+\/[a-z0-9-]+\/[a-z0-9-]+\.(?:webp|png|jpe?g)$/i.test(u.pathname)) {
+      throw new Error(label + " must reference a trusted Sanity CDN image");
+    }
+    if (!Number.isInteger(asset.bytes) || asset.bytes < 1 || asset.bytes > 3_000_000) {
+      throw new Error(label + " exceeds the 3 MB uploaded-image limit or has missing size metadata");
+    }
+    return;
+  }
   required(asset.src, `${label}.src`);
   required(asset.alt, `${label}.alt`);
   if (!Number.isInteger(asset.width) || !Number.isInteger(asset.height) || asset.width < 1 || asset.height < 1 || asset.width > 10000 || asset.height > 10000) {

@@ -1,6 +1,6 @@
-# Phase 2A: content-management foundation (draft, not active)
+# Phase 2A/B: content-management and Sanity editor scaffold (draft, not active)
 
-This branch begins Phase 2 without enabling an insecure editor or modifying the public content. **The administration interface, authentication, and online forms are not live.** Do not merge Phase 2 until deployment and access controls are confirmed.
+This branch implements the owner-approved Sanity Studio editor without changing the approved public content. **The studio, authentication, automated rebuilds, and online forms are not live.** Keep the PR in draft until invited-account access, publishing behavior, and hosting are confirmed.
 
 ## What is ready for review
 
@@ -8,17 +8,20 @@ This branch begins Phase 2 without enabling an insecure editor or modifying the 
 - src/data/editorial/ contains JSON files for announcements, gatherings, ministries, individual sermon recordings, and participation (Bible studies, outreach, volunteering).
 - src/content.ts combines these files into the existing typed SiteContent model. Public pages, routes, and existing links remain unchanged.
 - scripts/validate-content.mjs runs before each production build; it checks stable IDs, unique IDs, dates, YouTube video-only URLs, and local images with alt text, dimensions, and a 3 MB upper bound. Invalid CMS content fails the build.
-- An editor-provider-neutral data contract is ready. The earlier draft GitHub-login CMS configuration was removed at the owner's request. No admin UI or authentication is exposed.
+- `studio/` supplies a separate Sanity editor with five singleton sections. Events, ministries, and other items automatically retain array keys as IDs; church staff do not need to work with IDs or GitHub.
+- `scripts/create-sanity-seed.mjs` prepares five documents from the approved content without importing anything. `scripts/pull-sanity-content.mjs` fetches only published documents from the church's public Sanity dataset during a site build, checks all five exist, maps editorial fields, and validates the complete site. If no project ID is configured, the build uses its current checked-in JSON (no live service required).
+- Public pages never ship Sanity editor credentials, passwords, write tokens, or a hard-coded admin email list. The validated published content is embedded into the prerendered static site; it is not a live administrative API.
 - CI now runs the content validation unit tests as well as existing lint, build, and browser tests.
 
-## Before enabling the administrator interface
+## Church setup needed before enabling the administrator interface
 
-1. Invite the two initial email identities separately: GCF media administration and the pastor's official church administration. Do not store their login addresses in the public client bundle; manage identities privately with the chosen provider.
-2. Select an actively supported email-based provider after verifying free/paid seats, authentication methods, MFA, recovery, roles, and any production email-delivery costs. Set up the provider/project and private environment credentials before connecting an admin UI.
-3. Make registration invite-only. Check both the authenticated user's identity and assigned admin role in trusted server-side logic or provider rules for every read/write. A hidden URL or browser-side email comparison is not access control.
-4. Keep pastor and media access independent. Later trusted media staff should receive individual, revocable media-role accounts so everyone can be trained on the same simple dashboard without sharing a password.
-5. Preserve reviewed publishing before content goes public. If a CMS writes directly to a database, apply a draft/review/publish state or equivalent; if it updates Git, protect main with reviewed PRs and CI. Test login, denied access, draft editing, publishing, and website updates on an unpublished preview before launch.
-6. Keep faith statements and other pastor-provided details under separate owner/pastoral review. The editor must not silently modify them.
+1. The media administrator creates a Sanity account/project at sanity.io, chooses a **public** `production` dataset for publicly displayable church content, and shares the non-secret Sanity project ID with the developer. Do **not** share passwords or tokens.
+2. Invite the pastor's separate official church email as a project **Administrator**; the media account remains an independent Administrator. Only project-invited accounts can edit. Sanity's free plan has up to 20 seats with Administrator and Viewer roles, so granular media-only editing permissions are not included in this plan. Keep 2-step login and individual credentials where supported.
+3. Run `npm ci --prefix studio`, copy `studio/.env.example` to `studio/.env` and fill the project ID/dataset. Run `npm run seed:sanity` from repository root and **review** `studio/seed.ndjson` against existing site data. Only after confirming the dataset is empty: `cd studio && npx sanity dataset import seed.ndjson production`. The one-time import is not part of the build and must not overwrite later edits.
+4. From `studio/`, use `npm run dev` to preview the admin interface and `npx sanity deploy` to host it on a Sanity-provided Studio URL. Give each invited administrator that login link. This is an independent sign-in site—not a public website editing route. Verify a non-invited user cannot modify content.
+5. On an unpublished Netlify preview, set `SANITY_PROJECT_ID`, `SANITY_DATASET=production`, and `SANITY_CONTENT_REQUIRED=true` for the site build. Netlify runs `npm run build` and reads only published content through Sanity's public read API. Do not add a Sanity write token. A missing project setting, failed fetch, missing collection, or invalid item aborts the build rather than blanking the site.
+6. After confirming manual builds and previews, create a private Netlify **build hook** and connect it as a Sanity **outgoing webhook** filtered to these five published document types. This lets Publish trigger a new website build; the site will not change until that build succeeds. Treat the hook URL as a secret; never commit or paste it publicly. Test publish, edit, unpublish, rejected content, and rebuild before making the system live.
+7. Keep the pastor-provided statement/articles of faith, approved banner, and official contact details outside routine editor access. Children's check-in remains pending and collects no minors' details.
 
 ## Later Phase 2 work
 

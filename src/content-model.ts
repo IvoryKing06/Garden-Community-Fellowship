@@ -4,6 +4,8 @@ export interface ImageAsset {
   alt: string;
   width: number;
   height: number;
+  /** Sanity CDN asset byte size, supplied by the content API. */
+  bytes?: number;
 }
 export interface Ministry {
   id: string;
