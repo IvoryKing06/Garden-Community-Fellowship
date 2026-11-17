@@ -70,13 +70,28 @@ export function PlanVisit() {
             {visit.address ??
               "Church address and directions are pending confirmation."}
           </p>
-          <a className="text-link" href={`mailto:${church.email}`}>
-            Request directions <ArrowRight size={16} />
-          </a>
+          {visit.address && (
+            <a
+              className="button"
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(visit.address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get Directions <ArrowUpRight size={16} />
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          )}
+          <p className="fine-print">
+            <a className="text-link" href={`mailto:${church.email}`}>
+              Questions about your visit? <ArrowRight size={16} />
+            </a>
+          </p>
         </article>
         <article className="info-card">
           <h2>Contact &amp; mailing</h2>
-          <p><a href={`tel:${church.phone}`}>{church.phone}</a></p>
+          <p>
+            <a href={`tel:${church.phone}`}>{church.phone}</a>
+          </p>
           <p>Mailing address: {church.mailingAddress}</p>
           <h3>Your visit</h3>
           <p>

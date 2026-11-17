@@ -260,7 +260,6 @@ function Home() {
           </div>
           <div className="welcome-art">
             <OfficialBanner />
-            <p>Our church’s approved illustrative artwork</p>
           </div>
         </div>
       </section>
@@ -352,10 +351,15 @@ function Home() {
           </p>
           {featuredGatherings.map((g) => (
             <article className="featured-event" key={g.id}>
-              <div className="featured-day">{g.day.replace("Every ", "")}</div>
+              <div className="featured-day">
+                {g.day.replace("Every ", "").replace(" of each month", "")}
+              </div>
               <div>
                 <h3>{g.title}</h3>
                 <p>{g.time}</p>
+                {g.recurrence === "monthly" && (
+                  <p className="doors-note">{g.day}</p>
+                )}
                 {g.id === "recovery" && (
                   <p className="doors-note">{g.description}</p>
                 )}

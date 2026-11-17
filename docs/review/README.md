@@ -9,7 +9,7 @@ All public inquiries use **gcf.online.studios@gmail.com**. The confirmed donatio
 - `npm ci` completed using the existing lockfile.
 - `npm run build` passed, including prerendered route HTML.
 - `npm run lint` passed.
-- `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm test`: eight tests passed. Coverage includes all nine routes, WCAG A/AA axe scans, browser errors, responsive overflow at 360/768/1440 px, navigation, expandable beliefs, schedule accuracy, public inquiry addresses, preserved links, banner loading, no-JavaScript HTML, homepage navigation and content hierarchy, and screenshots.
+- `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm test`: nine tests passed. Coverage includes all nine routes, WCAG A/AA axe scans, browser errors, responsive overflow at 360/768/1440 px, navigation, expandable beliefs, schedule accuracy, public inquiry addresses, preserved links, banner loading, no-JavaScript HTML, homepage navigation and content hierarchy, and screenshots.
 - All Articles of Faith headings and paragraphs were compared in source order against the attached DOCX after trimming surrounding whitespace; no doctrinal text or references were omitted.
 - All nine public routes are captured. Screenshots below use 1440 × 1000 desktop and 390 × 844 mobile viewports, with full-page capture. These are local production-preview results; no deployment has been performed.
 
@@ -40,3 +40,9 @@ All public inquiries use **gcf.online.studios@gmail.com**. The confirmed donatio
 Pastoral review of the complete beliefs transcription remains requested. Confirm Sunday Step Study recurrence (weekly or first-Sunday only), a separate time for first-Sunday Communion and Potluck Meal if applicable, and how the Monday cafés relate to the confirmed 6:15 PM doors-open note. The site explicitly identifies these scheduling uncertainties. “Women’s Bible Stories” preserves the source title pending clarification. Accessibility/parking/check-in, leadership, and individual sermon recordings remain deferred.
 
 Do not merge or deploy as part of this change.
+
+## Final polish
+
+The homepage banner caption is removed; alt text, intrinsic dimensions, and full-image responsive behavior are preserved. The three featured event badges now read Monday, Tuesday, and First Friday at equal compact heights. The monthly event still states “First Friday of each month” beside its verified time.
+
+Plan Your Visit includes a prominent Get Directions link to Google Maps directions for the confirmed street address, opening a new tab with `noopener noreferrer`. Visitor email contact remains available. Browser tests verify the exact Maps destination, new-tab behavior, and contact link on desktop and mobile. The external response is intercepted for repeatable tests; Google’s live service is not tested. Updated Home and Plan Your Visit screenshots are included above.

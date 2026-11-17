@@ -305,6 +305,64 @@ test("homepage highlights approved content and routes visitors to full details",
   await expect(page.locator(".event-row")).toHaveCount(10);
 });
 
+test("final polish keeps compact recurring badges and accessible map directions", async ({
+  page,
+  context,
+}) => {
+  // Intercept only the external destination so the test verifies link behavior
+  // without depending on Google's service or the environment's outbound policy.
+  await context.route("https://www.google.com/maps/dir/**", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<title>Directions destination</title>",
+    }),
+  );
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    await expect(page.locator(".welcome-art")).not.toContainText(
+      /approved illustrative artwork/i,
+    );
+    const badges = page.locator(".featured-day");
+    await expect(badges).toHaveText(["Monday", "Tuesday", "First Friday"]);
+    const sizes = await badges.evaluateAll((nodes) =>
+      nodes.map((node) => ({
+        height: node.getBoundingClientRect().height,
+        fits: node.scrollWidth <= node.clientWidth,
+      })),
+    );
+    expect(
+      sizes.every(
+        (size) =>
+          size.height === sizes[0].height && size.height <= 50 && size.fits,
+      ),
+    ).toBe(true);
+    await expect(page.locator(".featured-events")).toContainText(
+      "First Friday of each month",
+    );
+    await page.goto("/plan-your-visit");
+    const directions = page.getByRole("link", { name: /Get Directions/ });
+    const address = "2931 Erskine Creek Rd, Lake Isabella, CA 93240";
+    const destination = new URL((await directions.getAttribute("href"))!);
+    expect(destination.origin + destination.pathname).toBe(
+      "https://www.google.com/maps/dir/",
+    );
+    expect(destination.searchParams.get("api")).toBe("1");
+    expect(destination.searchParams.get("destination")).toBe(address);
+    await expect(directions).toHaveAttribute("target", "_blank");
+    await expect(directions).toHaveAttribute("rel", "noopener noreferrer");
+    const popupPromise = page.waitForEvent("popup");
+    await directions.click();
+    const popup = await popupPromise;
+    await popup.waitForLoadState();
+    expect(popup.url()).toBe(destination.href);
+    await popup.close();
+    await expect(
+      page.getByRole("link", { name: "Questions about your visit?" }),
+    ).toHaveAttribute("href", "mailto:gcf.online.studios@gmail.com");
+  }
+});
+
 test("capture desktop and mobile review screenshots", async ({ page }) => {
   for (const [device, width, height] of [
     ["desktop", 1440, 1000],
