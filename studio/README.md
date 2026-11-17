@@ -4,9 +4,9 @@ This is a separate Sanity Studio app for the Garden Community Fellowship media a
 
 ## One-time setup (by the church/project owner)
 
-1. Create a free Sanity project and public `production` dataset at https://www.sanity.io/manage/. Public means website content can be read, **not** that anyone can edit. Only invited Sanity project members can edit.
+1. The church's Sanity project is now configured with ID `gs8p6s6x`. At https://www.sanity.io/manage/ verify the dataset is named `production` and is **public** for read-only published website content. Public means visitors can read published content, **not** that anyone can edit. Only invited Sanity project members can edit.
 2. Invite the media and pastor email accounts separately, with Administrator project membership. Sanity's free plan does not give custom media-only versus pastor-only roles. Don't share passwords with teammates.
-3. Copy `.env.example` to `.env` here and set `SANITY_STUDIO_PROJECT_ID` to the project ID (not a password). Keep the dataset `production` unless intentionally changed.
+3. The public project ID is already in `sanity.config.ts` and `sanity.cli.ts`. If you need a different dataset than `production`, copy `.env.example` to `.env` and update `SANITY_STUDIO_DATASET`.
 4. At the repository root, run `npm run seed:sanity` and review the generated ignored `studio/seed.ndjson`. **Only once, and only on a verified empty dataset**, run `npx sanity dataset import seed.ndjson production` from inside `studio/`. Never re-import over a working dataset; that could overwrite staff edits.
 5. Run `npm ci` and `npm run check` from this folder, then `npm run dev` to review the editor. Log in with an invited Sanity account.
 6. Run `npx sanity deploy` from this folder to select a Sanity-hosted admin URL. Share that URL with approved administrators, not a GitHub URL.

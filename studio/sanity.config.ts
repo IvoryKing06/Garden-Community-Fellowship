@@ -2,10 +2,8 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./schemaTypes";
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
-if (!projectId) {
-  throw new Error("Set SANITY_STUDIO_PROJECT_ID after creating the church's Sanity project.");
-}
+// The project ID is public configuration, not a secret or an admin credential.
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || "gs8p6s6x";
 
 export default defineConfig({
   name: "garden-community-fellowship",
