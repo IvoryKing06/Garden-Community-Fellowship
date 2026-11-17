@@ -14,6 +14,7 @@ This handoff is not an authorization to publish the original DOCX files or their
 - Do **not** use proposed ministry nicknames such as **Oaks** or **Olive Branches**. No proposed nicknames should appear until independently approved.
 - The approved oak/cross/sunrise/mountain website banner remains the branding reference. Avoid substituting an unapproved logo.
 - Do not invent a leadership roster or any additional ministry names, ages, or times.
+- **Leadership names, biographies, and photographs will be provided later.** Do not invent or use stock portraits of leaders. Leave a clean optional placeholder/section hidden or clearly pending until approved assets and details arrive; do not block Phase 1 on them.
 
 ## Church location and contact from the Statement of Faith
 
@@ -21,7 +22,7 @@ This handoff is not an authorization to publish the original DOCX files or their
 - Mailing address: **PO Box 536, Lake Isabella, CA 93240**.
 - Phone: **661-301-2451**.
 - Contact email printed on the pastor-supplied statement: **gardencommunityfellowship@gmail.com**.
-- Earlier website discussions identified **gcf.online.studios@gmail.com** for website/media/form notifications. **Ask the owner which public email and form notification recipient to use; do not silently substitute one for the other.**
+- **Owner-confirmed website contact address: gcf.online.studios@gmail.com.** Display this for all public website communication, including Connect, volunteer inquiries, Plan Your Visit, and future contact/volunteer form notifications. The pastor-supplied **gardencommunityfellowship@gmail.com** is for official church documents only and must **not** be displayed as the website contact or used as the destination for website inquiries. No further email confirmation is needed.
 - Do not publish the church tax ID just because it appears in the source.
 
 ## Official church schedule (from pastor's schedule)
