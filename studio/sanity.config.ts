@@ -10,19 +10,17 @@ export default defineConfig({
   title: "The Garden · Website Administration",
   projectId,
   dataset: process.env.SANITY_STUDIO_DATASET || "production",
-  plugins: [
-    structureTool({
-      structure: (S) =>
-        S.list()
-          .title("Church Website")
-          .singletons([
-            "announcementsPage",
-            "gatheringsPage",
-            "ministriesPage",
-            "sermonsPage",
-            "participationPage",
-          ]),
-    }),
-  ],
+  // Register the fixed document IDs before Structure Tool renders them.
+  // Sanity's default structure handles these singleton entries automatically.
+  document: {
+    singletons: [
+      "announcementsPage",
+      "gatheringsPage",
+      "ministriesPage",
+      "sermonsPage",
+      "participationPage",
+    ],
+  },
+  plugins: [structureTool()],
   schema: { types: schemaTypes },
 });
