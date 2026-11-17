@@ -11,5 +11,5 @@ for (const { file } of Object.values(editableDocuments)) {
 const documents = editorialToDocuments(files);
 const target = resolve(root, "studio/seed.ndjson");
 await writeFile(target, `${documents.map((document) => JSON.stringify(document)).join("\n")}\n`);
-console.log("Prepared five Sanity documents in studio/seed.ndjson (gitignored, not imported).");
-console.log("After creating an EMPTY Sanity dataset, review this file before running the documented one-time import.");
+console.log(`Prepared ${documents.length} Sanity documents in studio/seed.ndjson (gitignored, not imported).`);
+console.log("For a NEW, EMPTY dataset only: review before importing. On the existing church dataset, create Meet the Team directly in Studio; do NOT reimport the seed.");

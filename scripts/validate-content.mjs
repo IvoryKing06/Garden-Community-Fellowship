@@ -65,7 +65,7 @@ export function validateImage(asset, label) {
   if (bytes > 3_000_000) throw new Error(`${label} exceeds the 3 MB image limit`);
 }
 export function validateContent(data) {
-  const { church, beliefs, branding, announcements, sermons, ministries, gatherings, participation } = data;
+  const { church, beliefs, branding, announcements, sermons, ministries, team, gatherings, participation } = data;
   required(church.name, "church.name");
   required(church.email, "church.email");
   if (!Array.isArray(beliefs.statement) || beliefs.statement.length !== 9 || !Array.isArray(beliefs.articles) || beliefs.articles.length !== 19) throw new Error("Approved beliefs must retain the 9 statements and 19 articles for pastoral review");
@@ -80,6 +80,12 @@ export function validateContent(data) {
   }
   validateIds(ministries.ministries, "ministries", ["name", "category", "description", "symbol"]);
   for (const item of ministries.ministries) validateImage(item.image, `ministry ${item.id} image`);
+  validateIds(team.team, "team", ["name", "role", "group"]);
+  for (const person of team.team) {
+    if (typeof person.visibleOnWebsite !== "boolean") throw new Error(`team ${person.id} must have an explicit visibility setting`);
+    if (person.bio != null && typeof person.bio !== "string") throw new Error(`team ${person.id} bio must be text`);
+    validateImage(person.image, `team ${person.id} image`);
+  }
   validateIds(gatherings.gatherings, "gatherings", ["title", "day", "time", "description", "category", "recurrence"]);
   for (const item of gatherings.gatherings) {
     if (!["weekly", "monthly", "unconfirmed"].includes(item.recurrence)) throw new Error(`gathering ${item.id} has unsupported recurrence`);
@@ -98,6 +104,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
       announcements: load("src/data/editorial/announcements.json"),
       sermons: load("src/data/editorial/sermons.json"),
       ministries: load("src/data/editorial/ministries.json"),
+      team: load("src/data/editorial/team.json"),
       gatherings: load("src/data/editorial/gatherings.json"),
       participation: load("src/data/editorial/participation.json"),
     });

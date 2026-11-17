@@ -27,6 +27,8 @@ This handoff is not an authorization to publish the original DOCX files or their
 
 ## Official church schedule (from pastor's schedule)
 
+**Owner update (November 17, 2026):** The Step Study row below is retained only as a historical transcription of the original pastor document. The church owner confirmed this is a closed meeting and it must **not** appear in public website events or schedule notes. Any future publicly announced Step Study will be entered as a new event when specifically scheduled.
+
 | When | Gathering | Time | Notes |
 | --- | --- | --- | --- |
 | Sunday | Prayer | 8:00–8:40 AM | |

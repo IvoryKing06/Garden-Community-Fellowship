@@ -10,6 +10,11 @@ export const pageInfo: Record<string, { title: string; description: string }> =
       description:
         "Get to know Garden Community Fellowship. Read our Statement of Faith and Articles of Faith.",
     },
+    "/team": {
+      title: "Meet the Team",
+      description:
+        "Meet the pastors, deacons, staff, and ministry leaders serving Garden Community Fellowship.",
+    },
     "/plan-your-visit": {
       title: "Plan Your Visit",
       description:
@@ -23,7 +28,7 @@ export const pageInfo: Record<string, { title: string; description: string }> =
     "/ministries": {
       title: "Ministries & Bible Studies",
       description:
-        "Discover Sprouts, men’s ministry, Celebrate Recovery, and weekly Bible studies at Garden Community Fellowship.",
+        "Discover Seeds, Sprouts, Roots, women's and men's ministries, Celebrate Recovery, and Bible studies at Garden Community Fellowship.",
     },
     "/sermons": {
       title: "Sermons",

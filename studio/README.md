@@ -1,6 +1,6 @@
 # The Garden — administrator editor
 
-This is a separate Sanity Studio app for the Garden Community Fellowship media administrator and pastor. It offers five easy sections: Announcements, Services & Events, Ministries, Sermons, and Bible Studies & Involvement. No GitHub account or code editing is needed for day-to-day use.
+This is a separate Sanity Studio app for the Garden Community Fellowship media administrator and pastor. It offers six easy sections: Announcements, Services & Events, Ministries, Meet the Team, Sermons, and Bible Studies & Involvement. No GitHub account or code editing is needed for day-to-day use.
 
 ## One-time setup (by the church/project owner)
 
@@ -15,6 +15,10 @@ This is a separate Sanity Studio app for the Garden Community Fellowship media a
 
 On the website's Netlify deployment, configure `SANITY_PROJECT_ID` (the same project ID), `SANITY_DATASET=production`, and `SANITY_CONTENT_REQUIRED=true` as build-time environment variables. The site syncs published documents during `npm run build`, verifies all required data, and prerenders public pages. An unconfigured local build uses approved backup JSON, while a configured production build refuses to publish if its project settings are missing.
 
-Sanity's Publish button saves content but does **not** directly update a static site. After an initial successful manual site rebuild, create a Netlify build hook under site settings, then in Sanity project management add an outgoing webhook for published content changes to the five singleton types. Keep the build-hook URL private. Each published change can then trigger a rebuild; confirm this behavior on a preview deployment before enabling production.
+Sanity's Publish button saves content but does **not** directly update a static site. After an initial successful manual site rebuild, create a Netlify build hook under site settings, then in Sanity project management add an outgoing webhook for published content changes to all six singleton types. Keep the build-hook URL private. Each published change can then trigger a rebuild; confirm this behavior on a preview deployment before enabling production.
+
+### Meet the Team rollout on the existing dataset
+
+After updating and redeploying the Studio code, open the new **Meet the Team** section. Add people with their names, roles, group, optional short biography, and optional portrait. Leave **Show this person on the website** off until their details and photo permission are confirmed; reorder the list by dragging. Publish the document when ready. The website accepts a missing Team document and shows a friendly introduction until at least one profile is approved. **Do not reimport the seed into the existing production dataset.** All leaders are edited in one place; there is no ministry-by-ministry duplicate.
 
 The approved Statement and Articles of Faith, banner, and official church details are deliberately not editable in this interface. Children's check-in information remains pending. Do not enter children's personal data into public fields.

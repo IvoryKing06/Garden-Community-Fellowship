@@ -16,6 +16,16 @@ export interface Ministry {
   schedule?: string | null;
   image?: ImageAsset | null;
 }
+/** Public profiles are centrally managed, not copied into each ministry. */
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  group: string;
+  bio?: string | null;
+  image?: ImageAsset | null;
+  visibleOnWebsite: boolean;
+}
 export interface Gathering {
   id: string;
   title: string;
@@ -53,6 +63,7 @@ export interface SiteContent {
   scheduleNotes: { id: string; title: string; description: string }[];
   beliefs: { statement: string[]; articles: { id: string; title: string; paragraphs: string[] }[] };
   ministries: Ministry[];
+  team: TeamMember[];
   gatherings: Gathering[];
   announcements: Announcement[];
   sermons: Sermon[];

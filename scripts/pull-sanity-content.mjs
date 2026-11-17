@@ -32,6 +32,7 @@ export async function pullSanityContent({ projectId = process.env.SANITY_PROJECT
     announcements: mapped["announcements.json"],
     gatherings: mapped["gatherings.json"],
     ministries: mapped["ministries.json"],
+    team: mapped["team.json"],
     sermons: mapped["sermons.json"],
     participation: mapped["participation.json"],
   });
@@ -42,7 +43,7 @@ export async function pullSanityContent({ projectId = process.env.SANITY_PROJECT
     await writeFile(temp, `${JSON.stringify(mapped[file], null, 2)}\n`);
     await rename(temp, target);
   }
-  console.log("Verified five published Sanity sections for the website build.");
+  console.log("Verified five required Sanity sections and optional approved team profiles for the website build.");
   return true;
 }
 

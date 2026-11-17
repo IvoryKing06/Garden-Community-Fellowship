@@ -1,5 +1,11 @@
 # Garden Community Fellowship
 
+## Phase 2 church-owner updates (November 17, 2026)
+
+The website now has a separate **Meet the Team** page in the About Us menu. Approved leaders will be managed once, in a new **Meet the Team** Sanity section (hidden by default until confirmed), not copied into each ministry. The Ministries page is being refreshed with richer illustrated cards for **Seeds** (infants), **Sprouts**, **Roots** (teens), **Men’s Ministry**, **Women’s Ministry**, and **Celebrate Recovery**. Three new ministries also need to be published through the live Sanity editor before they appear on the Netlify Sanity-powered preview. The old Step Study is a closed meeting and has been removed from public fallback data and suppressed by the Sanity sync. The media team should remove the old entry from Sanity's Services & Events list; future events can be announced separately when approved. No unconfirmed meeting times or children's check-in details have been invented.
+
+The Sanity Studio is hosted at `https://garden-community-fellowship.sanity.studio/`, while this branch remains under review. A newer Studio build is required to reveal the extra Meet the Team section. The older Phase 1 notes below are retained as historical build records.
+
 Phase 1 website: React, TypeScript, Vite, and free-static-host-compatible output. Pages: Home, About Us, Plan Your Visit, Events & Outreach, Ministries & Bible Studies, Sermons, Get Involved, and Connect. Watch Live remains available, and the old Contact URL is preserved. The traditional cream masthead and navy navigation use burgundy accents, grouped About/Ministries dropdowns, and responsive mobile navigation. The homepage highlights service times, the source-backed church purpose, community, and involvement, followed by a ministry feature, three recurring events, and a Sunday visit card. See [the visual review gallery](docs/review/README.md) for desktop and mobile screenshots.
 
 ## Development and verification

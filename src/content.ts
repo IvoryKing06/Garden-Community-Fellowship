@@ -2,6 +2,7 @@ import siteData from "./data/site.json";
 import announcementData from "./data/editorial/announcements.json";
 import sermonData from "./data/editorial/sermons.json";
 import ministryData from "./data/editorial/ministries.json";
+import teamData from "./data/editorial/team.json";
 import gatheringData from "./data/editorial/gatherings.json";
 import participationData from "./data/editorial/participation.json";
 import type { SiteContent } from "./content-model";
@@ -11,6 +12,7 @@ export const content: SiteContent = {
   ...announcementData,
   ...sermonData,
   ...ministryData,
+  ...teamData,
   ...gatheringData,
   ...participationData,
 };
@@ -19,6 +21,7 @@ export const {
   beliefs,
   scheduleNotes,
   ministries,
+  team,
   gatherings,
   announcements,
   sermons,

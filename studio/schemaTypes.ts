@@ -74,6 +74,38 @@ const ministry = defineArrayMember({
   preview: { select: { title: "name", subtitle: "category" } },
 });
 
+const teamMember = defineArrayMember({
+  name: "teamMember",
+  title: "Team member",
+  type: "object",
+  fields: [
+    defineField({ name: "name", title: "Full name", type: "string", validation: (rule) => rule.required() }),
+    defineField({ name: "role", title: "Church role or title", type: "string", validation: (rule) => rule.required() }),
+    defineField({
+      name: "group",
+      title: "Team group",
+      type: "string",
+      options: { list: ["Pastoral Leadership", "Deacons", "Ministry Leaders", "Church Staff", "Other"] },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({ name: "bio", title: "Short introduction (optional)", type: "text", rows: 4 }),
+    photo,
+    defineField({
+      name: "visibleOnWebsite",
+      title: "Show this person on the website",
+      description: "Leave off until their name, role, and permission to use their photo have been confirmed.",
+      type: "boolean",
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: { title: "name", subtitle: "role", media: "image", visible: "visibleOnWebsite" },
+    prepare({ title, subtitle, media, visible }) {
+      return { title: title || "Unnamed team member", subtitle: `${subtitle || "Role pending"} · ${visible ? "Visible" : "Hidden"}`, media };
+    },
+  },
+});
+
 const sermon = defineArrayMember({
   name: "sermon",
   title: "Sermon recording",
@@ -134,6 +166,20 @@ export const schemaTypes = [
     title: "Ministries",
     type: "document",
     fields: [defineField({ name: "ministries", title: "Ministries", type: "array", of: [ministry] })],
+  }),
+  defineType({
+    name: "teamPage",
+    title: "Meet the Team",
+    type: "document",
+    fields: [
+      defineField({
+        name: "team",
+        title: "Church leadership and ministry team",
+        description: "One place to update staff and ministry leaders. Drag to reorder; enable Show on website for approved profiles.",
+        type: "array",
+        of: [teamMember],
+      }),
+    ],
   }),
   defineType({
     name: "sermonsPage",

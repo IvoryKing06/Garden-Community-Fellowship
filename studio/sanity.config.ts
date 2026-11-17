@@ -17,6 +17,7 @@ export default defineConfig({
       "announcementsPage",
       "gatheringsPage",
       "ministriesPage",
+      "teamPage",
       "sermonsPage",
       "participationPage",
     ],

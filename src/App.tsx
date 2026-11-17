@@ -14,6 +14,10 @@ import {
   BookOpen,
   Users,
   HeartHandshake,
+  Baby,
+  Flower2,
+  Sprout,
+  TreePine,
   MapPin,
   Check,
   ChevronDown,
@@ -30,6 +34,7 @@ import {
   visit,
   gatherings,
   ministries,
+  team,
   bibleStudies,
   outreach,
   announcements,
@@ -125,6 +130,7 @@ function Header() {
               </summary>
               <div className="nav-dropdown">
                 <NavLink to="/about">About Us</NavLink>
+                <NavLink to="/team">Meet the Team</NavLink>
                 <Link to="/about#what-we-believe">What We Believe</Link>
               </div>
             </details>
@@ -449,6 +455,11 @@ function About() {
             online.
           </p>
           <Button to="/connect">Start a conversation</Button>
+          <p className="fine-print">
+            <Link className="text-link" to="/team">
+              Meet the people who serve here <ArrowRight size={16} />
+            </Link>
+          </p>
         </div>
       </section>
       <section
@@ -492,6 +503,67 @@ function About() {
     </>
   );
 }
+function MeetTheTeam() {
+  // Unconfirmed profiles never appear, even when staff are drafting a public document.
+  const people = team.filter((person) => person.visibleOnWebsite);
+  return (
+    <>
+      <PageHead label="Our people" title="Meet the Team.">
+        Get to know the pastors, deacons, staff, and ministry leaders serving
+        our church community. We are rooted together in faith and fellowship.
+      </PageHead>
+      <section className="container section team-section" aria-label="Church leadership team">
+        {people.length ? (
+          <div className="team-grid">
+            {people.map((person) => (
+              <article className="team-card" key={person.id}>
+                {person.image ? (
+                  <img
+                    className="team-portrait"
+                    src={person.image.src}
+                    alt={person.image.alt}
+                    width={person.image.width}
+                    height={person.image.height}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="team-portrait team-portrait-placeholder" aria-hidden="true">
+                    <Users size={54} strokeWidth={1} />
+                  </div>
+                )}
+                <div className="team-card-copy">
+                  <Eyebrow>{person.group}</Eyebrow>
+                  <h2>{person.name}</h2>
+                  <p className="team-role">{person.role}</p>
+                  {person.bio && <p className="team-bio">{person.bio}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="team-empty">
+            <Users size={40} strokeWidth={1.2} aria-hidden="true" />
+            <h2>Getting to know our team</h2>
+            <p>
+              We’re preparing introductions for our church leadership and
+              ministry teams. Please check back as profiles are confirmed.
+            </p>
+            <Button to="/connect">Contact the church</Button>
+          </div>
+        )}
+      </section>
+    </>
+  );
+}
+function MinistryIcon({ name }: { name: string }) {
+  const label = name.toLowerCase();
+  if (label.includes("seeds")) return <Baby size={45} strokeWidth={1.4} />;
+  if (label.includes("sprouts")) return <Sprout size={45} strokeWidth={1.4} />;
+  if (label.includes("roots")) return <TreePine size={45} strokeWidth={1.4} />;
+  if (label.includes("women")) return <Flower2 size={45} strokeWidth={1.4} />;
+  if (label.includes("recovery")) return <HeartHandshake size={45} strokeWidth={1.4} />;
+  return <Users size={45} strokeWidth={1.4} />;
+}
 function Ministries() {
   useEffect(() => {
     if (location.hash)
@@ -501,58 +573,68 @@ function Ministries() {
     <>
       <PageHead
         label="Ministries & Bible Studies"
-        title="Grow in good company."
+        title="Every season has a place to grow."
       >
-        Explore places to connect, share life, and take your next step at
-        Garden.
+        From our littlest Seeds to Roots, fellowship, and recovery, discover
+        the ways our church community grows together.
       </PageHead>
-      <section className="container ministry-details">
-        {ministries.map((m) => (
-          <article id={m.id} className="ministry-detail" key={m.id}>
-            <span className="number">{m.symbol}</span>
-            <div>
-              <Eyebrow>{m.category}</Eyebrow>
-              <h2>{m.name}</h2>
-              <p>{m.description}</p>
-              {m.schedule && <p>{m.schedule}</p>}
-              {m.image && (
-                <img
-                  className="content-image"
-                  src={m.image.src}
-                  alt={m.image.alt}
-                  width={m.image.width}
-                  height={m.image.height}
-                  loading="lazy"
-                />
-              )}
-              <details>
-                <summary>
-                  More information <ChevronDown size={18} />
-                </summary>
-                <p>
-                  {m.id === "recovery"
-                    ? "Celebrate Recovery meets Mondays from 7:00–9:00 PM. Doors open at 6:15 PM. Café times and Sunday Step Study recurrence are awaiting confirmation."
-                    : "Schedules, age groups, and ministry leader information are awaiting confirmation."}{" "}
-                  Email us for current information and location details.
-                </p>
-                <Link className="text-link" to="/connect">
-                  Ask about this ministry <ArrowRight size={16} />
+      <section className="container ministry-showcase">
+        <div className="ministry-intro">
+          <div>
+            <Eyebrow>Find your community</Eyebrow>
+            <h2>Rooted in faith. Growing together.</h2>
+            <p>
+              Little ones, teens, adults, and anyone seeking encouragement—
+              there’s room at the Garden to connect and grow in faith.
+            </p>
+          </div>
+          <Sprout className="ministry-intro-mark" size={178} strokeWidth={0.65} aria-hidden="true" />
+        </div>
+        <div className="ministry-card-grid">
+          {ministries.map((m, i) => (
+            <article id={m.id} className="ministry-card" key={m.id}>
+              <div className="ministry-card-art" aria-hidden="true">
+                {m.image ? (
+                  <img src={m.image.src} alt={m.image.alt} width={m.image.width} height={m.image.height} loading="lazy" />
+                ) : (
+                  <MinistryIcon name={m.name} />
+                )}
+                <span className="ministry-card-number">{String(i + 1).padStart(2, "0")}</span>
+              </div>
+              <div className="ministry-card-copy">
+                <p className="ministry-card-category">{m.category}</p>
+                <h2>{m.name}</h2>
+                <p>{m.description}</p>
+                {m.schedule && (
+                  <p className="ministry-card-schedule"><Clock3 size={15} />{m.schedule}</p>
+                )}
+                <Link className="ministry-card-link" to="/connect">
+                  Ask about {m.name} <ArrowRight size={17} />
                 </Link>
-              </details>
-            </div>
-          </article>
-        ))}
-      </section>
-      <section className="container section">
-        <h2>Bible Studies</h2>
-        {bibleStudies.length ? (
-          bibleStudies.map((b) => (
-            <article key={b.id}>
-              <h3>{b.title}</h3>
-              <p>{b.description}</p>
-              <p>{b.schedule ?? "Schedule pending confirmation."}</p>
+              </div>
             </article>
-          ))
+          ))}
+        </div>
+      </section>
+      <section className="container section ministry-bible-studies">
+        <div className="ministry-section-heading">
+          <div>
+            <Eyebrow>Open the Word</Eyebrow>
+            <h2>Bible Studies</h2>
+          </div>
+          <p>Gather around Scripture, ask questions, and grow in understanding together.</p>
+        </div>
+        {bibleStudies.length ? (
+          <div className="ministry-study-grid">
+            {bibleStudies.map((b) => (
+              <article key={b.id} className="ministry-study-card">
+                <BookOpen size={27} strokeWidth={1.5} aria-hidden="true" />
+                <h3>{b.title}</h3>
+                <p>{b.description}</p>
+                <span className="ministry-study-time">{b.schedule ?? "Schedule pending confirmation."}</span>
+              </article>
+            ))}
+          </div>
         ) : (
           <p>
             Bible study topics, leaders, and schedules are pending confirmation.{" "}
@@ -792,6 +874,7 @@ export function Site() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/team" element={<MeetTheTeam />} />
           <Route path="/ministries" element={<Ministries />} />
           <Route path="/events" element={<Events />} />
           <Route path="/watch" element={<Watch />} />

@@ -9,9 +9,30 @@ const seed = Object.entries(editableDocuments).map(([type, cfg]) => ({
   ...Object.fromEntries(cfg.keys.map((key) => [key, []])),
 }));
 
-test("Sanity requires all five published singleton documents before sync", () => {
+test("Sanity requires the five existing published singleton documents before sync", () => {
   assert.throws(() => documentsToEditorial(seed.slice(1)), /Missing required published Sanity document/);
   assert.throws(() => documentsToEditorial([...seed, seed[0]]), /duplicate Sanity document/);
+});
+
+test("team directory is optional until approved, with hidden profiles never exported", () => {
+  const base = structuredClone(seed.filter((doc) => doc._id !== "teamPage"));
+  assert.deepEqual(documentsToEditorial(base)["team.json"], { team: [] });
+  const team = structuredClone(seed.find((doc) => doc._id === "teamPage"));
+  team.team.push({ id: "hidden-person", name: "Hidden", role: "Deacon", group: "Deacons", visibleOnWebsite: false });
+  team.team.push({ id: "approved-person", name: "Approved Person", role: "Deacon", group: "Deacons", visibleOnWebsite: true });
+  const profiles = documentsToEditorial([...base, team])["team.json"].team;
+  assert.equal(profiles.length, 1);
+  assert.equal(profiles[0].name, "Approved Person");
+  assert.equal(profiles[0].id, "approved-person");
+});
+
+test("closed Step Study seed entry cannot reappear on the public events page", () => {
+  const docs = structuredClone(seed);
+  const gatherings = docs.find((doc) => doc._id === "gatheringsPage");
+  gatherings.gatherings.push({ id: "step-study", title: "Retired closed meeting" });
+  gatherings.gatherings.push({ id: "new-public-event", title: "Approved public event" });
+  const events = documentsToEditorial(docs)["gatherings.json"].gatherings;
+  assert.deepEqual(events.map((event) => event.id), ["new-public-event"]);
 });
 
 test("editor keys remain stable, even if Sanity generates a non-slug key", () => {
