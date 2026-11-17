@@ -21,8 +21,8 @@ This handoff is not an authorization to publish the original DOCX files or their
 - Meeting location: **2931 Erskine Creek Rd, Lake Isabella, CA 93240**.
 - Mailing address: **PO Box 536, Lake Isabella, CA 93240**.
 - Phone: **661-301-2451**.
-- Contact email printed on the pastor-supplied statement: **gardencommunityfellowship@gmail.com**.
-- **Owner-confirmed website contact address: gcf.online.studios@gmail.com.** Display this for all public website communication, including Connect, volunteer inquiries, Plan Your Visit, and future contact/volunteer form notifications. The pastor-supplied **gardencommunityfellowship@gmail.com** is for official church documents only and must **not** be displayed as the website contact or used as the destination for website inquiries. No further email confirmation is needed.
+- The pastor's official church email appears in the original source document. Reserve it for church-document and approved private administration use; do not add it to the public website, frontend configuration, or public CMS login allowlist.
+- **Owner-confirmed website contact address: gcf.online.studios@gmail.com.** Display this for all public website communication, including Connect, volunteer inquiries, Plan Your Visit, and future contact/volunteer form notifications. The pastor's official church email must **not** be displayed as the website contact or used as the destination for website inquiries. No further email confirmation is needed.
 - Do not publish the church tax ID just because it appears in the source.
 
 ## Official church schedule (from pastor's schedule)

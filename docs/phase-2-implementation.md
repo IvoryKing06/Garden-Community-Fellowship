@@ -8,16 +8,17 @@ This branch begins Phase 2 without enabling an insecure editor or modifying the 
 - src/data/editorial/ contains JSON files for announcements, gatherings, ministries, individual sermon recordings, and participation (Bible studies, outreach, volunteering).
 - src/content.ts combines these files into the existing typed SiteContent model. Public pages, routes, and existing links remain unchanged.
 - scripts/validate-content.mjs runs before each production build; it checks stable IDs, unique IDs, dates, YouTube video-only URLs, and local images with alt text, dimensions, and a 3 MB upper bound. Invalid CMS content fails the build.
-- docs/cms/config.yml is a draft Decap CMS GitHub-backend configuration using review-first editorial workflow. It is deliberately outside public/ until sign-in is proven.
+- An editor-provider-neutral data contract is ready. The earlier draft GitHub-login CMS configuration was removed at the owner's request. No admin UI or authentication is exposed.
 - CI now runs the content validation unit tests as well as existing lint, build, and browser tests.
 
 ## Before enabling the administrator interface
 
-1. Confirm who the 1–2 individual church editors are and their GitHub usernames. Enable MFA and grant the minimum repository permissions needed; do not share passwords.
-2. Decide on a maintained GitHub OAuth broker or approved hosted GitHub auth service, verify its current availability/cost, and configure the actual callback domain, session safeguards, CSRF/state protection, and server-side secrets. No OAuth credentials belong in this repository.
-3. Confirm branch protection: publication requires reviewed PRs, checks, and explicit approval. A Decap draft/publish action can create or merge GitHub PRs; the UI itself does not enforce who can bypass GitHub branch protections.
-4. After successful test login with the designated editor account, move the reviewed configuration to public/admin/config.yml, add a pinned CMS loader at public/admin/index.html, and test draft → PR → review → publish → site rebuild on an unpublished preview first.
-5. Keep faith statements and other pastor-provided details under separate owner/pastoral review. The editor must not silently modify them.
+1. Invite the two initial email identities separately: GCF media administration and the pastor's official church administration. Do not store their login addresses in the public client bundle; manage identities privately with the chosen provider.
+2. Select an actively supported email-based provider after verifying free/paid seats, authentication methods, MFA, recovery, roles, and any production email-delivery costs. Set up the provider/project and private environment credentials before connecting an admin UI.
+3. Make registration invite-only. Check both the authenticated user's identity and assigned admin role in trusted server-side logic or provider rules for every read/write. A hidden URL or browser-side email comparison is not access control.
+4. Keep pastor and media access independent. Later trusted media staff should receive individual, revocable media-role accounts so everyone can be trained on the same simple dashboard without sharing a password.
+5. Preserve reviewed publishing before content goes public. If a CMS writes directly to a database, apply a draft/review/publish state or equivalent; if it updates Git, protect main with reviewed PRs and CI. Test login, denied access, draft editing, publishing, and website updates on an unpublished preview before launch.
+6. Keep faith statements and other pastor-provided details under separate owner/pastoral review. The editor must not silently modify them.
 
 ## Later Phase 2 work
 

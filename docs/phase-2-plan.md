@@ -2,13 +2,22 @@
 
 Phase 1 uses static content only. No admin route, authentication endpoint, submission endpoint, payment integration, or prayer-request form is enabled.
 
-## Maintained CMS recommendation
+## Administrator login decision — November 17, 2026
 
-Use Decap CMS with its GitHub backend and an editorial review workflow. Its editor should manage `src/data/site.json` and upload assets under `public/uploads`. Editors work in a maintained CMS interface; they do not edit TypeScript. Plan for exactly 1–2 designated church administrators with individual GitHub accounts, MFA, least-privilege repository access, protected publishing branch, and reviewed publishing rights. Never use a shared administrator password. Repository authorization, not hiding an `/admin` URL, must enforce access. Revoke both repository membership and OAuth sessions when an administrator leaves.
+The site owner selected **email-based administrator sign-in, not GitHub sign-in for church staff**. GitHub remains the development repository, invisible to church administrators. Begin with two independently accessible administrator identities:
 
-Decap itself is open source; GitHub authentication requires a securely hosted OAuth broker or a supported identity integration. A static host alone cannot hold OAuth secrets. Phase 2 must confirm an actively supported backend, callback domain, allowed repository/users, CSRF/state protection, token handling, and free-tier availability before enabling editing. Do not assume legacy Netlify Identity/Git Gateway services are available. Keep credentials server-side. Avoid purchasing CMS seats or hosting without approval.
+- **Media administration** — the owner-confirmed GCF media mailbox (currently managed by the site owner).
+- **Pastoral administration** — the pastor's separate official church mailbox. The account must remain usable independently of the media account.
 
-`src/content-model.ts` is the typed content contract. The CMS collection should expose these fields (stable IDs are required):
+Do not hard-code the pastoral login address, passwords, or an admin allowlist into the publicly shipped site or public repository. Store memberships and roles in a provider-managed, access-controlled system. Only invited identities may sign in; verify identity server-side and authorize content writes separately from mere login. Add suitable MFA and recovery. Never ask church staff to share passwords in chat.
+
+When trusted media-team members join, **invite them to their own accounts with media permissions**, instead of reusing the original media credentials. This gives simple login while preserving an audit trail, individual revocation, and access for the pastor if a media member leaves. The owner's shared-login idea is a workflow preference to discuss, not a security requirement to silently implement.
+
+### CMS and authentication selection
+
+The previous draft Decap GitHub OAuth configuration is retired because it does not match the desired editor experience. Choose a maintained, email-login-capable CMS or backend after reviewing current free limits, administrator-seat pricing, role management, security, and hosting integration. Sanity Studio (email/password accounts and multi-user free tier) and a Supabase-backed custom editor (email OTP/password with database access policies, but additional development and mail-delivery setup) are candidates, **not yet connected services**. A static Vite deployment alone cannot securely authenticate and authorize administrators or hold server secrets. No new hosting, identity provider, payment plan, or credentials have been provisioned.
+
+`src/content-model.ts` is the typed content contract. The eventual editor should expose these fields (stable IDs are required):
 
 | Collection/setting                  | Editor fields                                                                                  |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------- |
